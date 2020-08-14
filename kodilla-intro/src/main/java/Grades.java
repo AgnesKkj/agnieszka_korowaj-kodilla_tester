@@ -26,9 +26,11 @@ public Grades() {
     //Zwracanie ostatniej dodanej oceny
 
     public void returnLatest() {
-    if(this.size == grades.length - 1) {
-    return;
-        }
+
+    if(this.size == grades[grades.length - 1]) {
+        return;
+    }
+
     }
 
     //Zwracanie średniej ocen
@@ -108,12 +110,6 @@ public static void main(String[] args) {
     grades.gradeAvg();
 
 
-
-
-
-
-
 }
-
 
 }
