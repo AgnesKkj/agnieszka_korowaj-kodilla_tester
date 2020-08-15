@@ -9,28 +9,16 @@ public class Application {
         this.height = height;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public double getAge() {
-        return age;
-    }
-
-    public double getHeight() {
-        return height;
-    }
-
     public void compareValues() {
         if(this.name == null) {
             return;
         }
 
         if(this.age > 30 && this.height > 160) {
-            System.out.println("User is older than 30 and higher then 160cm");
+            System.out.println(this.name + " is older than 30 and taller than 160 cm.");
         }
         else {
-            System.out.println("User is younger than 30 or lower than 160cm");
+            System.out.println(this.name + " is younger than 30 or shorter than 160 cm.");
         }
     }
 
@@ -49,9 +37,9 @@ public class Application {
                 System.out.println("User is younger than 30 or lower than 160cm");
             }*/
 
-        adam.getName();
-        adam.getAge();
-        adam.getHeight();
+        System.out.println("Name: " + adam.name);
+        System.out.println("Age: " + adam.age);
+        System.out.println("Height: " + adam.height);
         adam.compareValues();
 
         }
