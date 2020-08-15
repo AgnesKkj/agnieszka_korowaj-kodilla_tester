@@ -15,7 +15,6 @@ public class User {
         return age;
     }
 
-
     public static void main(String [] args) {
 
         User anna = new User("Anna", 20);
@@ -27,8 +26,8 @@ public class User {
 
         User[] users = {anna, betty, carl, david, eva, frankie};
 
-        int sum = 0;
         System.out.println("Calculating the age average...");
+        int sum = 0;
         for(int i = 0; i < users.length; i++) {
             sum += users[i].age;
         }
@@ -36,8 +35,8 @@ public class User {
 
         System.out.println("Whose age is below average?");
         for(int i = 0; i < users.length; i++) {
-            if(users[i].age < ageAverage) {
-                System.out.println(users[i].name);
+            if(users[i].getAge() < ageAverage) {
+                System.out.println(users[i].getName());
             }
         }
 
