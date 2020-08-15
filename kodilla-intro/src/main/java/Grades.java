@@ -1,115 +1,95 @@
 public class Grades {
+    private int[] grades;
+    private int size;
+    double gradeAverage;
 
-private int[] grades;
-private int size;
-double gradeAverage;
-
-public Grades() {
-    this.grades = new int[10];
-    this.size = 0;
-}
-
+    public Grades() {
+        this.grades = new int[10];
+        this.size = 0;
+    }
     //Dodanie oceny do tablicy
-
     public void addGrade(int value) {
         if(this.size == 10) {
             return;
         }
-        else {
+            //values[] to błąd w materiałach
+            this.grades[this.size] = value;
+            this.size++;
 
-        //podobno values[] to błąd w materiałach
-        this.grades[this.size] = value;
-        this.size++;
-        }
     }
-
     //Zwracanie ostatniej dodanej oceny
 
-    public void returnLatest() {
+    public int returnLatest() {
 
-    if(this.size == grades[grades.length - 1]) {
-        return;
-    }
-
+        if(this.size == 0) {
+            return 0;
+        }
+        return this.grades[grades.length-1];
     }
 
     //Zwracanie średniej ocen
 
-    public void gradeAvg() {
-    if(this.size == 0) {
-        return;
+    public double gradeAvg() {
+        if(this.size == 0) {
+            return 0;
+        }
+            double sum = 0;
+            for (int value:grades) {
+                sum += value;
+            }
+            this.gradeAverage = sum / this.size;
+            return this.gradeAverage;
     }
-    else {
-    double sum = 0;
-    for (int value:grades) {
-        sum += value;
-    }
-    this.gradeAverage = sum / this.size;
-    return;
+
+
+    public static void main(String[] args) {
+        Grades gradesTable = new Grades();
+        //1
+        gradesTable.addGrade(4);
+        gradesTable.returnLatest();
+        gradesTable.gradeAvg();
+        //2
+        gradesTable.addGrade(5);
+        gradesTable.returnLatest();
+        gradesTable.gradeAvg();
+        //3
+        gradesTable.addGrade(3);
+        gradesTable.returnLatest();
+        gradesTable.gradeAvg();
+        //4
+        gradesTable.addGrade(3);
+        gradesTable.returnLatest();
+        gradesTable.gradeAvg();
+        //5
+        gradesTable.addGrade(2);
+        gradesTable.returnLatest();
+        gradesTable.gradeAvg();
+        //6
+        gradesTable.addGrade(5);
+        gradesTable.returnLatest();
+        gradesTable.gradeAvg();
+        //7
+        gradesTable.addGrade(4);
+        gradesTable.returnLatest();
+        gradesTable.gradeAvg();
+        //8
+        gradesTable.addGrade(4);
+        gradesTable.returnLatest();
+        gradesTable.gradeAvg();
+        //9
+        gradesTable.addGrade(3);
+        gradesTable.returnLatest();
+        gradesTable.gradeAvg();
+        //10
+        gradesTable.addGrade(4);
+        gradesTable.returnLatest();
+        gradesTable.gradeAvg();
+        //11
+        gradesTable.addGrade(2);
+        gradesTable.returnLatest();
+        gradesTable.gradeAvg();
 
     }
-}
 
-public static void main(String[] args) {
-
-    Grades grades = new Grades();
-
-    //1
-    grades.addGrade(4);
-    grades.returnLatest();
-    grades.gradeAvg();
-
-    //2
-    grades.addGrade(5);
-    grades.returnLatest();
-    grades.gradeAvg();
-
-    //3
-    grades.addGrade(3);
-    grades.returnLatest();
-    grades.gradeAvg();
-
-    //4
-    grades.addGrade(3);
-    grades.returnLatest();
-    grades.gradeAvg();
-
-    //5
-    grades.addGrade(2);
-    grades.returnLatest();
-    grades.gradeAvg();
-
-    //6
-    grades.addGrade(5);
-    grades.returnLatest();
-    grades.gradeAvg();
-
-    //7
-    grades.addGrade(4);
-    grades.returnLatest();
-    grades.gradeAvg();
-
-    //8
-    grades.addGrade(4);
-    grades.returnLatest();
-    grades.gradeAvg();
-
-    //9
-    grades.addGrade(3);
-    grades.returnLatest();
-    grades.gradeAvg();
-
-    //10
-    grades.addGrade(4);
-    grades.returnLatest();
-    grades.gradeAvg();
-
-    //11
-    grades.addGrade(2);
-    grades.returnLatest();
-    grades.gradeAvg();
-
-
-}
 
 }
