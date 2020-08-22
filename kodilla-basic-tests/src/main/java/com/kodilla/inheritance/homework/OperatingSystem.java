@@ -13,7 +13,7 @@ public class OperatingSystem {
             return;
         }
         turnOn = true;
-
+        System.out.println("System włączony.");
     }
 
     public void turnOff() {
@@ -21,6 +21,7 @@ public class OperatingSystem {
             return;
         }
         turnOn = false;
+        System.out.println("System wyłączony.");
     }
 
     public int getReleaseYear() {

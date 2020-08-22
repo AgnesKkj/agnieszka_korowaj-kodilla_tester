@@ -4,14 +4,26 @@ public class Application {
 
     public static void main(String[] args) {
 
-        OperatingSystem systemOne = new OperatingSystem(2005);
+        OperatingSystem systemZero = new OperatingSystem(2005);
+        System.out.println("Rok wydania: " + systemZero.getReleaseYear());
+        System.out.println("Uruchamianie systemu...");
+        systemZero.turnOn();
+        System.out.println("Zamykanie systemu...");
+        systemZero.turnOff();
+
+        SystemExtendOne systemOne = new SystemExtendOne(2010);
         System.out.println("Rok wydania: " + systemOne.getReleaseYear());
         System.out.println("Uruchamianie systemu...");
         systemOne.turnOn();
-        System.out.println("Czy jest uruchomiony? " + systemOne.getTurnOn());
-        System.out.println("Wyłączanie systemu...");
+        System.out.println("Zamykanie systemu...");
         systemOne.turnOff();
-        System.out.println("Czy jest uruchomiony? " + systemOne.getTurnOn());
+
+        SystemExtendTwo systemTwo = new SystemExtendTwo(2015);
+        System.out.println("Rok wydania: " + systemTwo.getReleaseYear());
+        System.out.println("Uruchamianie systemu...");
+        systemTwo.turnOn();
+        System.out.println("Zamykanie systemu...");
+        systemTwo.turnOff();
 
     }
 }

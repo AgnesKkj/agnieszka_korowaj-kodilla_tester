@@ -13,6 +13,7 @@ public class SystemExtendOne extends OperatingSystem {
         }
         //nadpisanie
         turnOn = true;
+        System.out.println("System uruchomiony.");
 
     }
 
@@ -23,9 +24,8 @@ public class SystemExtendOne extends OperatingSystem {
         }
         //nadpisanie
         turnOn = false;
+        System.out.println("System zamknięty.");
     }
-
-
 
 
 }

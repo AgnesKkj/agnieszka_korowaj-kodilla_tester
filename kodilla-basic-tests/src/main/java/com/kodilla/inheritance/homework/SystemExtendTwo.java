@@ -13,6 +13,7 @@ public class SystemExtendTwo extends OperatingSystem {
         }
         //nadpisanie
         turnOn = true;
+        System.out.println("System on.");
 
     }
 
@@ -23,6 +24,7 @@ public class SystemExtendTwo extends OperatingSystem {
         }
         //nadpisanie
         turnOn = false;
+        System.out.println("System off.");
     }
 
 
