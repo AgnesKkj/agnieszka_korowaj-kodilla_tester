@@ -41,7 +41,7 @@ public class CalculatorTestSuite {
     @Test public void testSquarePos() {
         Calculator calculator = new Calculator();
         //ustawione, żeby wyszedł fail
-        int a = 7;
+        int a = 6;
         int squareResultPos = calculator.square(a);
         assertEquals(36, squareResultPos);
     }
