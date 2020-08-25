@@ -1,9 +1,6 @@
 package com.kodilla.school;
-
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class StudentTestSuite {
     @Test
     public void shouldCalculateCorrectAveragesIfValuesAreInRange() {
@@ -11,7 +8,6 @@ public class StudentTestSuite {
         student.addGeographyGrade(4);
         student.addGeographyGrade(4);
         student.addGeographyGrade(2);
-
         student.addHistoryGrade(1);
         student.addHistoryGrade(5);
 
