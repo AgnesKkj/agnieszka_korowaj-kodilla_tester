@@ -18,9 +18,11 @@ public class BankTestSuite {
     @Test
     public void shouldAddMachine() {
         Bank theBank = new Bank();
-        theBank.addMachine(1);
+        theBank.addMachine(10000);
         assertEquals(1, theBank.getNumberOfMachines());
     }
+
+    //Czy dodaje transakcje wg metody addTransaction() po utworzeniu bankomatu
 
     //Czy liczy łączną ilość wpłat
     //Czy liczy łączną ilość wypłat

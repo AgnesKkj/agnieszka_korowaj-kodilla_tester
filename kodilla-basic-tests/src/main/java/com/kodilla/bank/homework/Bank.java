@@ -2,8 +2,8 @@ package com.kodilla.bank.homework;
 
 public class Bank {
 
+    private CashMachine[] theMachines;
     private int numberOfMachines;
-    private CashMachine[] allTheMachines;
     private int index;
 
     private int totalDeposits;
@@ -17,40 +17,42 @@ public class Bank {
     //do iteracji
 
     public Bank() {
-        allTheMachines = new CashMachine[0];
+        this.theMachines = new CashMachine[0];
         this.numberOfMachines = 0;
-        this.index = index;
 
     }
     //Dodaje bankomat
     public void addMachine(int index) {
         this.numberOfMachines++;
-        CashMachine[] newAllMachines = new CashMachine[this.numberOfMachines];
-        System.arraycopy(allTheMachines, 0, newAllMachines, 0, allTheMachines.length);
-        newAllMachines[this.numberOfMachines - 1] = index;
-        this.allTheMachines = newAllMachines;
+        CashMachine[] newTheMachines = new CashMachine[this.numberOfMachines];
+        System.arraycopy(theMachines, 0, newTheMachines, 0, theMachines.length);
+        newTheMachines[this.numberOfMachines - 1] = index;
+        this.theMachines = newTheMachines;
     }
 
     public CashMachine[] getNumberOfMachines() {
-        return allTheMachines;
+        return theMachines;
     }
 
     public int totalBalance() {
-        for(int balance: allTheMachines.length) {
+        for(int balance: theMachines.length) {
+
             totalBalance+= balance;
         }
         return totalBalance;
     }
 
     public int totalDeposits() {
-        for(int depositSize: allTheMachines.length) {
+        for(int depositSize: theMachines.length) {
+
             totalBalance+= depositSize;
         }
         return totalDeposits;
     }
 
     public int totalWithdrawals() {
-        for(int withdrawalSize: allTheMachines.length) {
+        for(int withdrawalSize: theMachines.length) {
+
             totalBalance+= withdrawalSize;
         }
         return totalWithdrawals;
