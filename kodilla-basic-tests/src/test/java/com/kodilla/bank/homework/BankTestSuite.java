@@ -11,24 +11,24 @@ public class BankTestSuite {
     public void shouldHaveZeroLength() {
         Bank theBank = new Bank();
         CashMachine[] allTheMachines = theBank.getNumberOfMachines();
-        assertEquals(0, allTheMachines.length);
+        assertEquals(0, theBank.getNumberOfMachines());
     }
 
     //Czy dodaje bankomat wg metody
     @Test
     public void shouldAddMachine() {
         Bank theBank = new Bank();
-        theBank.addMachine("Bankomat 1");
-        int[] allTheMachines = theBank.getNumberOfMachines();
-        assertEquals(1, allTheMachines.length);
+        theBank.addMachine(1);
+        assertEquals(1, theBank.getNumberOfMachines());
     }
 
     //Czy liczy łączną ilość wpłat
     //Czy liczy łączną ilość wypłat
+    //Czy liczy bilans całkowity
     //Czy liczy średnią sumę wpłat
     //Czy liczy średnią sumę wypłat
-    //Czy liczy średnią
-    //Czy liczy bilans całkowity
+    //Czy liczy łączną średnią
+
 
 
 

@@ -10,7 +10,7 @@ public class CashMachine {
     private String name;
 
     public CashMachine(int balance) {
-        this.name = name;
+
         this.transactions = new int[0];
         this.size = 0;
         this.balance = balance;
@@ -45,30 +45,23 @@ public class CashMachine {
         System.out.println("Lącznie operacji: " + this.getSize());
     }
 
-
-
     public int[] getTransactions() {
-
         return transactions;
     }
 
     public int getBalance() {
-
         return balance;
     }
 
     public int getSize() {
-
         return size;
     }
 
     public int getDepositSize() {
-
         return depositSize;
     }
 
     public int getWithdrawalSize() {
-
         return withdrawalSize;
     }
 }

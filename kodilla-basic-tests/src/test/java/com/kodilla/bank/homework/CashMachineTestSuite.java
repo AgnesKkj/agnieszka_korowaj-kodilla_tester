@@ -10,7 +10,7 @@ public class CashMachineTestSuite {
     //Czy jest pusta na początku
     @Test
     public void shouldHaveZeroLength() {
-        CashMachine cashMachine = new CashMachine( 10000);
+        CashMachine cashMachine = new CashMachine(10000);
         int[] transactions = cashMachine.getTransactions();
         assertEquals(0, transactions.length);
     }
