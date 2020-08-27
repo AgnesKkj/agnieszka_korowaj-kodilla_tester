@@ -5,8 +5,11 @@ public class CashMachine {
     public int[] transactions;
     public int balance;
     public int size;
+    private int value;
     public int depositSize;
     public int withdrawalSize;
+    public int depositSum;
+    public int withdrawalSum;
 
     public CashMachine(int balance) {
 
@@ -46,6 +49,27 @@ public class CashMachine {
             System.out.println("Lącznie wypłat: " + this.getWithdrawalSize());
             System.out.println("Lącznie operacji: " + this.getSize());
         }
+    }
+
+    public int getDepositSum() {
+        depositSum = 0;
+        for(int i = 0; i < transactions.length; i++) {
+            if(transactions[i] > 0) {
+                depositSum += transactions[i];
+            }
+        }
+        return depositSum;
+    }
+
+    public int getWithdrawalSum() {
+        withdrawalSum = 0;
+        for(int i = 0; i < transactions.length; i++) {
+            if(transactions[i] < 0) {
+                withdrawalSum += transactions[i];
+            }
+        }
+
+        return withdrawalSum;
     }
 
     public int[] getTransactions() {

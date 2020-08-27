@@ -25,7 +25,7 @@ public class CashMachineTestSuite {
         assertEquals(2, cashMachine.getSize());
     }
 
-    //Czy nie zwiększa zakresu, nie rejestruje wpłaty ani wypłaty przy wartości 0
+    //Czy nie uruchamia metody przy wartości 0
     @Test
     public void shouldNotAddTransactionZeroValue() {
         cashMachine.addTransaction(0);
@@ -69,12 +69,52 @@ public class CashMachineTestSuite {
         assertEquals(10000, cashMachine.getBalance());
     }
 
-    //Czy nie wypłaca po osiągnięciu ujemnego salda
+    //Czy zatrzymuje wypłacanie po osiągnięciu zerowego salda
     @Test
     public void shouldNotWithdrawifBalanceNegative() {
-        cashMachine.addTransaction(-200);
+        cashMachine.addTransaction(-10200);
         assertEquals(10000, cashMachine.getBalance());
+        assertEquals(0,cashMachine.withdrawalSize);
     }
 
+    //Czy sumuje wartości wpłat
+    @Test
+    public void shouldSumDepositValues() {
+        cashMachine.addTransaction(500);
+        cashMachine.addTransaction(200);
+        cashMachine.addTransaction(400);
+        cashMachine.getDepositSum();
+        assertEquals(1100, cashMachine.getDepositSum());
+    }
+
+    //Czy nie dodaje wypłaty do wpłat
+    @Test
+    public void shouldNotAddWithdrawalToDeposits() {
+        cashMachine.addTransaction(500);
+        cashMachine.addTransaction(-200);
+        cashMachine.addTransaction(400);
+        cashMachine.getDepositSum();
+        assertEquals(900, cashMachine.getDepositSum());
+    }
+
+    //Czy sumuje wartości wypłat
+    @Test
+    public void shouldSumWithdrawalValues() {
+        cashMachine.addTransaction(-500);
+        cashMachine.addTransaction(-200);
+        cashMachine.addTransaction(-400);
+        cashMachine.getWithdrawalSum();
+        assertEquals(-1100, cashMachine.getWithdrawalSum());
+    }
+
+    //Czy nie dodaje wpłaty do wypłat
+    @Test
+    public void shouldNotAddDepositToWithdrawals() {
+        cashMachine.addTransaction(-500);
+        cashMachine.addTransaction(-200);
+        cashMachine.addTransaction(400);
+        cashMachine.getDepositSum();
+        assertEquals(-700, cashMachine.getWithdrawalSum());
+    }
 
 }

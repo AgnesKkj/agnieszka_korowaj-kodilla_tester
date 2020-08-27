@@ -3,14 +3,13 @@ package com.kodilla.bank.homework;
 public class Bank {
 
     private CashMachine[] theMachines;
-    private int numberOfMachines;
+    public int numberOfMachines;
 
     public int totalDeposits;
     public int totalWithdrawals;
     public int totalBalance;
-    public int depositAverage;
-    public int withdrawalAverage;
-    public int totalAverage;
+    public double depositAverage;
+    public double withdrawalAverage;
 
     //jak stworzyć tablicę obiektów klasy CashMachine, żeby brało stamtąd zmienne depositSize, withdrawSize, balance itd.
     //do iteracji
@@ -20,6 +19,7 @@ public class Bank {
         this.numberOfMachines = 0;
 
     }
+
     //Dodaje bankomat
     public void addMachine(CashMachine balance) {
         this.numberOfMachines++;
@@ -33,12 +33,11 @@ public class Bank {
         return numberOfMachines;
     }
 
-
     public int totalBalance() {
         //Jednak musiałam zamienić forEach() na złożone for()
         totalBalance = 0;
         //dla każdego obiektu z theMachines, iterując po theMachines
-        for(int i = 0; i < theMachines.length; i++) {
+        for (int i = 0; i < theMachines.length; i++) {
             //sumuję atrybut balance z każdego obiektu z theMachines, korzystając z gettera
             totalBalance += theMachines[i].getBalance();
         }
@@ -47,20 +46,56 @@ public class Bank {
 
     public int totalDeposits() {
         totalDeposits = 0;
-        for(int i = 0; i < theMachines.length; i++) {
-            //analogicznie z depositSize
-            totalDeposits += theMachines[i].getDepositSize();
+        for (int i = 0; i < theMachines.length; i++) {
+            if (theMachines[i].depositSize == 0) {
+                return 0;
+            } else {
+                //analogicznie z depositSize
+                totalDeposits += theMachines[i].getDepositSize();
+            }
         }
         return totalDeposits;
     }
 
     public int totalWithdrawals() {
         totalWithdrawals = 0;
-        for(int i = 0; i < theMachines.length; i++) {
-            totalWithdrawals += theMachines[i].getWithdrawalSize();
+        for (int i = 0; i < theMachines.length; i++) {
+            if (theMachines[i].withdrawalSize == 0) {
+                return 0;
+            } else {
+                totalWithdrawals += theMachines[i].getWithdrawalSize();
+            }
         }
         return totalWithdrawals;
     }
 
+    public double totalDepositAverage() {
+        if (totalDeposits == 0) {
+            return 0;
+        } else {
+            depositAverage = 0;
+            int sum = 0;
+            for (int i = 0; i < theMachines.length; i++) {
+                sum += theMachines[i].depositSum;
+            }
+            depositAverage = sum / totalDeposits;
+            return depositAverage;
+        }
+    }
+
+    public double totalWithdrawalAverage() {
+        if (totalWithdrawals == 0) {
+            return 0;
+        } else {
+            withdrawalAverage = 0;
+            int sum = 0;
+            for (int i = 0; i < theMachines.length; i++) {
+                sum += theMachines[i].withdrawalSum;
+            }
+            withdrawalAverage = sum / totalWithdrawals;
+            return withdrawalAverage;
+        }
+    }
 
 }
+
