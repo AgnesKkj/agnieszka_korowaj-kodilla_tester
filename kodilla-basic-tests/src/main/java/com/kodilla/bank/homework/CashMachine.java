@@ -16,35 +16,40 @@ public class CashMachine {
     }
 
     public void addTransaction(int value) {
-        this.size++;
-        int[] newTransactions = new int[this.size];
-        System.arraycopy(transactions, 0, newTransactions, 0, transactions.length);
-        newTransactions[this.size - 1] = value;
-        this.transactions = newTransactions;
-        System.out.println("Bilans " + this.getBalance());
-        if (value > 0) {
-            this.depositSize++;
-            balance += value;
-            System.out.println("Wpłacono " + value);
-        } else if (value < 0) {
-            if (balance < value * -1) {
-                System.out.println("Bankomat nie ma środków do wykonania wypłaty.");
-            } else {
-                this.withdrawalSize++;
-                balance += value;
-                System.out.println("Wypłacono " + value * -1);
-            }
+        if (value == 0) {
+            return;
         } else {
-            System.out.println("Nie zmieniono stanu konta.");
+            this.size++;
+            int[] newTransactions = new int[this.size];
+            System.arraycopy(transactions, 0, newTransactions, 0, transactions.length);
+            newTransactions[this.size - 1] = value;
+            this.transactions = newTransactions;
+            System.out.println("Bilans " + this.getBalance());
+            if (value > 0) {
+                this.depositSize++;
+                balance += value;
+                System.out.println("Wpłacono " + value);
+            } else if (value < 0) {
+                if (balance < value * -1) {
+                    System.out.println("Bankomat nie ma środków do wykonania wypłaty.");
+                } else {
+                    this.withdrawalSize++;
+                    balance += value;
+                    System.out.println("Wypłacono " + value * -1);
+                }
+            } else {
+                System.out.println("Nie zmieniono stanu konta.");
 
+            }
+            System.out.println("Saldo " + this.getBalance());
+            System.out.println("Lącznie wpłat: " + this.getDepositSize());
+            System.out.println("Lącznie wypłat: " + this.getWithdrawalSize());
+            System.out.println("Lącznie operacji: " + this.getSize());
         }
-        System.out.println("Bilans " + this.getBalance());
-        System.out.println("Lącznie wpłat: " + this.getDepositSize());
-        System.out.println("Lącznie wypłat: " + this.getWithdrawalSize());
-        System.out.println("Lącznie operacji: " + this.getSize());
     }
 
     public int[] getTransactions() {
+
         return transactions;
     }
 
@@ -53,14 +58,17 @@ public class CashMachine {
     }
 
     public int getSize() {
+
         return size;
     }
 
     public int getDepositSize() {
+
         return depositSize;
     }
 
     public int getWithdrawalSize() {
+
         return withdrawalSize;
     }
 }

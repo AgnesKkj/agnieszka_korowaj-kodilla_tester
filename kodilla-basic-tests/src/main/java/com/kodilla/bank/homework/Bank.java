@@ -4,14 +4,13 @@ public class Bank {
 
     private CashMachine[] theMachines;
     private int numberOfMachines;
-    private int index;
 
-    private int totalDeposits;
-    private int totalWithdrawals;
-    private int totalBalance;
-    private int depositAverage;
-    private int withdrawalAverage;
-    private int totalAverage;
+    public int totalDeposits;
+    public int totalWithdrawals;
+    public int totalBalance;
+    public int depositAverage;
+    public int withdrawalAverage;
+    public int totalAverage;
 
     //jak stworzyć tablicę obiektów klasy CashMachine, żeby brało stamtąd zmienne depositSize, withdrawSize, balance itd.
     //do iteracji
@@ -22,43 +21,46 @@ public class Bank {
 
     }
     //Dodaje bankomat
-    public void addMachine(int index) {
+    public void addMachine(CashMachine balance) {
         this.numberOfMachines++;
-        CashMachine[] newTheMachines = new CashMachine[this.numberOfMachines];
-        System.arraycopy(theMachines, 0, newTheMachines, 0, theMachines.length);
-        newTheMachines[this.numberOfMachines - 1] = index;
-        this.theMachines = newTheMachines;
+        CashMachine[] newTab = new CashMachine[this.numberOfMachines];
+        System.arraycopy(theMachines, 0, newTab, 0, theMachines.length);
+        newTab[this.numberOfMachines - 1] = balance;
+        this.theMachines = newTab;
     }
 
-    public CashMachine[] getNumberOfMachines() {
-        return theMachines;
+    public int getNumberOfMachines() {
+        return numberOfMachines;
     }
+
 
     public int totalBalance() {
-        for(int balance: theMachines.length) {
-
-            totalBalance+= balance;
+        //Jednak musiałam zamienić forEach() na złożone for()
+        totalBalance = 0;
+        //dla każdego obiektu z theMachines, iterując po theMachines
+        for(int i = 0; i < theMachines.length; i++) {
+            //sumuję atrybut balance z każdego obiektu z theMachines, korzystając z gettera
+            totalBalance += theMachines[i].getBalance();
         }
         return totalBalance;
     }
 
     public int totalDeposits() {
-        for(int depositSize: theMachines.length) {
-
-            totalBalance+= depositSize;
+        totalDeposits = 0;
+        for(int i = 0; i < theMachines.length; i++) {
+            //analogicznie z depositSize
+            totalDeposits += theMachines[i].getDepositSize();
         }
         return totalDeposits;
     }
 
     public int totalWithdrawals() {
-        for(int withdrawalSize: theMachines.length) {
-
-            totalBalance+= withdrawalSize;
+        totalWithdrawals = 0;
+        for(int i = 0; i < theMachines.length; i++) {
+            totalWithdrawals += theMachines[i].getWithdrawalSize();
         }
         return totalWithdrawals;
     }
-
-
 
 
 }

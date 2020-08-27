@@ -6,11 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CashMachineTestSuite {
 
+    CashMachine cashMachine = new CashMachine(10000);
+
 
     //Czy jest pusta na początku
     @Test
     public void shouldHaveZeroLength() {
-        CashMachine cashMachine = new CashMachine(10000);
         int[] transactions = cashMachine.getTransactions();
         assertEquals(0, transactions.length);
     }
@@ -18,17 +19,24 @@ public class CashMachineTestSuite {
     //Czy dodaje transakcję wskazaną metodą
     @Test
     public void shouldAddTransaction() {
-        CashMachine cashMachine = new CashMachine(10000);
         cashMachine.addTransaction(500);
         assertEquals(1, cashMachine.getSize());
         cashMachine.addTransaction(-200);
         assertEquals(2, cashMachine.getSize());
     }
 
+    //Czy nie zwiększa zakresu, nie rejestruje wpłaty ani wypłaty przy wartości 0
+    @Test
+    public void shouldNotAddTransactionZeroValue() {
+        cashMachine.addTransaction(0);
+        assertEquals(0,cashMachine.getSize());
+        assertEquals(0,cashMachine.getDepositSize());
+        assertEquals(0,cashMachine.getWithdrawalSize());
+    }
+
     //Czy rejestruje wpłatę przy wartości dodatniej
     @Test
     public void shouldAddToDepositsPositiveValue() {
-        CashMachine cashMachine = new CashMachine(10000);
         cashMachine.addTransaction(500);
         assertEquals(1, cashMachine.getDepositSize());
     }
@@ -36,7 +44,6 @@ public class CashMachineTestSuite {
     //Czy rejestruje wypłatę przy wartości ujemnej
     @Test
     public void shouldAddToWithdrawalsNegativeValue() {
-        CashMachine cashMachine = new CashMachine(10000);
         cashMachine.addTransaction(-600);
         assertEquals(1, cashMachine.getWithdrawalSize());
     }
@@ -44,7 +51,6 @@ public class CashMachineTestSuite {
     //Czy dodaje do salda przy wartości dodatniej
     @Test
     public void shouldAddToBalancePositiveValue() {
-        CashMachine cashMachine = new CashMachine(10000);
         cashMachine.addTransaction(400);
         assertEquals(10400, cashMachine.getBalance());
     }
@@ -52,7 +58,6 @@ public class CashMachineTestSuite {
     //Czy odejmuje od salda przy wartości ujemnej
     @Test
     public void shouldSubstractFromBalanceNegativeValue() {
-        CashMachine cashMachine = new CashMachine(10000);
         cashMachine.addTransaction(-400);
         assertEquals(9600, cashMachine.getBalance());
     }
@@ -60,7 +65,6 @@ public class CashMachineTestSuite {
     //Czy nie dodaje do salda przy wartości 0
     @Test
     public void shouldDoNothingZeroValue() {
-        CashMachine cashMachine = new CashMachine(10000);
         cashMachine.addTransaction(0);
         assertEquals(10000, cashMachine.getBalance());
     }
@@ -68,9 +72,8 @@ public class CashMachineTestSuite {
     //Czy nie wypłaca po osiągnięciu ujemnego salda
     @Test
     public void shouldNotWithdrawifBalanceNegative() {
-        CashMachine cashMachine = new CashMachine(100);
         cashMachine.addTransaction(-200);
-        assertEquals(100, cashMachine.getBalance());
+        assertEquals(10000, cashMachine.getBalance());
     }
 
 
