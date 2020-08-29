@@ -5,7 +5,6 @@ public class CashMachine {
     public int[] transactions;
     public int balance;
     public int size;
-    private int value;
     public int depositSize;
     public int withdrawalSize;
     public int depositSum;
