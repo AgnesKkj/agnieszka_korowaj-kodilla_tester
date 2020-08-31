@@ -33,8 +33,8 @@ public class CarsListApplication {
         System.out.println("-------");
         System.out.println(" ");
         System.out.println("Po usunięciu 6. pozycji:");
-        for(Car ford : cars) {
-            CarUtils.describeCar(ford);
+        for(Car car : cars) {
+            CarUtils.describeCar(car);
         }
         System.out.println(" ");
         System.out.println("Rozmiar kolekcji: " + cars.size());
@@ -44,8 +44,8 @@ public class CarsListApplication {
         System.out.println("-------");
         System.out.println(" ");
         System.out.println("Po usunięciu obiektu new Ford(4.7,1.2,1.1):");
-        for(Car ford : cars) {
-            CarUtils.describeCar(ford);
+        for(Car car : cars) {
+            CarUtils.describeCar(car);
         }
         System.out.println(" ");
         System.out.println("Rozmiar kolekcji: " + cars.size());
