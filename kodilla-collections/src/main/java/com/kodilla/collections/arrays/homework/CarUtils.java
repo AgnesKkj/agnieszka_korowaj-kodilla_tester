@@ -7,7 +7,7 @@ import com.kodilla.collections.interfaces.homework.Peugeot;
 
 public class CarUtils {
 
-    static void describeCar(Car car) {
+    public static void describeCar(Car car) {
         System.out.println("-----");
         System.out.println("Car type: " + getCarName(car));
         System.out.println("Car acceleration: " + car.getAcceleration());
