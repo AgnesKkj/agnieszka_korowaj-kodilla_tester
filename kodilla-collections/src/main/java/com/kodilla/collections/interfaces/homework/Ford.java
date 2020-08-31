@@ -1,5 +1,7 @@
 package com.kodilla.collections.interfaces.homework;
 
+import java.util.Objects;
+
 public class Ford implements Car {
 
     double speed;
@@ -29,6 +31,21 @@ public class Ford implements Car {
     public void decreaseSpeed() {
 
         speed*=brakes;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ford ford = (Ford) o;
+        return Double.compare(ford.speed, speed) == 0 &&
+                Double.compare(ford.acceleration, acceleration) == 0 &&
+                Double.compare(ford.brakes, brakes) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(speed, acceleration, brakes);
     }
 
     @Override
