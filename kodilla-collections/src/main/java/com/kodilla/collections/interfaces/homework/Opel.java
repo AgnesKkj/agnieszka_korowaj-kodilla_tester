@@ -28,4 +28,13 @@ public class Opel implements Car {
     public void decreaseSpeed() {
         speed*=brakes;
     }
+
+    @Override
+    public String toString() {
+        return "Opel{" +
+                "speed=" + speed +
+                ", acceleration=" + acceleration +
+                ", brakes=" + brakes +
+                '}';
+    }
 }

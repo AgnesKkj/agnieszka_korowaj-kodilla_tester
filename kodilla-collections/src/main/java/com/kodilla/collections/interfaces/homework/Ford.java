@@ -13,6 +13,7 @@ public class Ford implements Car {
     }
 
     public double getSpeed() {
+
         return speed;
     }
 
@@ -21,10 +22,21 @@ public class Ford implements Car {
     }
 
     public void increaseSpeed() {
+
         speed*=acceleration;
     }
 
     public void decreaseSpeed() {
+
         speed*=brakes;
+    }
+
+    @Override
+    public String toString() {
+        return "Ford{" +
+                "speed=" + speed +
+                ", acceleration=" + acceleration +
+                ", brakes=" + brakes +
+                '}';
     }
 }
