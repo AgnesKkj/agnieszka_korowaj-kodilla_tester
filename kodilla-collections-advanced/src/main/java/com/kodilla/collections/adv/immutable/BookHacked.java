@@ -1,6 +1,6 @@
 package com.kodilla.collections.adv.immutable;
 
-class BookHacked extends Book {
+/*class BookHacked extends Book {
     private String realTitle;
 
     public BookHacked(String author, String title) {
@@ -17,3 +17,4 @@ class BookHacked extends Book {
         return realTitle;
     }
 }
+*/
