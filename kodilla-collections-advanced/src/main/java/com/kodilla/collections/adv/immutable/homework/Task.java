@@ -10,10 +10,12 @@ public final class Task {
     }
 
     public final String getTitle() {
+
         return title;
     }
 
     public final int getDuration() {
+
         return duration;
     }
 
