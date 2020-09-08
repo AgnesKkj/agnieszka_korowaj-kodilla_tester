@@ -32,4 +32,9 @@ public class Flight {
     public int hashCode() {
         return Objects.hash(getDeparture(), getArrival());
     }
+
+    @Override
+    public String toString() {
+        return "From: " + departure + "to: " + arrival;
+    }
 }

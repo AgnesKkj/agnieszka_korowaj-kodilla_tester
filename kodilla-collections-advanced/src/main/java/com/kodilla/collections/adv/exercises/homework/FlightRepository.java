@@ -7,8 +7,11 @@ public class FlightRepository {
 
     static List<Flight> flightsTable = new ArrayList<>();
 
-    public static void getFlightsTable() {
-        //returns list
+    public static List<Flight> getFlightsTable() {
+        return flightsTable;
+    }
 
+    public int size() {
+        return flightsTable.size();
     }
 }
