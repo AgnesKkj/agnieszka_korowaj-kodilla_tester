@@ -11,7 +11,7 @@ public class BookApplication {
         System.out.println("-----");
         System.out.println("Directory size: " + BookManager.bookDirectory.size());
 
-        //porównywanie po hashCode - tutaj nie wiem, jak porządnie przeiterować, żeby porównywało "każdy z każdym"
+        
         System.out.println("-----");
         System.out.println("Do objects have the same hashCodes?");
         System.out.println("0 and 1");
