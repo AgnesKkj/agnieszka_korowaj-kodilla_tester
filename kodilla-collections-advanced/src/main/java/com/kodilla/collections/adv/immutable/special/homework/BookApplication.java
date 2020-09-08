@@ -1,24 +1,25 @@
 package com.kodilla.collections.adv.immutable.special.homework;
-
 public class BookApplication {
     public static void main(String[] args) {
         //część 1, tworzenie obiektów bez kolekcji
         BookManager.createBook("The Lord of the Rings", "J. R. R. Tolkien");
-        BookManager.createBook("Catcher in the Rye", "J.D. Salinger");
-        BookManager.createBook("Catcher in the Rye", "J.D. Salinger");
+        //BookManager.createBook("Catcher in the Rye", "J.D. Salinger");
+        //BookManager.createBook("Catcher in the Rye", "J.D. Salinger");
+        Book bookOne = new Book("Catcher in the Rye", "J.D. Salinger");
+        BookManager.bookDirectory.add(bookOne);
+        Book bookTwo = new Book("Catcher in the Rye", "J.D. Salinger");
+        BookManager.bookDirectory.add(bookTwo);
 
         //część 2, dodajemy kolekcję w BookManager
-        System.out.println("-----");
+        System.out.println("All tokens: " + BookManager.bookDirectory);
         System.out.println("Directory size: " + BookManager.bookDirectory.size());
 
-        
-        System.out.println("-----");
-        System.out.println("Do objects have the same hashCodes?");
-        System.out.println("0 and 1");
-        System.out.println(BookManager.bookDirectory.get(0).equals(BookManager.bookDirectory.get(1)));
-        System.out.println("1 and 2");
-        System.out.println(BookManager.bookDirectory.get(1).equals(BookManager.bookDirectory.get(2)));
-        System.out.println("0 and 2");
-        System.out.println(BookManager.bookDirectory.get(0).equals(BookManager.bookDirectory.get(2)));
+        //część 3, porównanie wg ==
+        System.out.println("Do they have the same values?");
+        System.out.println(bookOne.equals(bookTwo));
+        if(bookOne.equals(bookTwo)) {
+            System.out.println("Are they the same book?");
+            System.out.println(bookOne == bookTwo);
+        }
     }
 }
