@@ -12,6 +12,7 @@ public class EnglishWord {
     }
 
     public PartOfSpeech getPartOfSpeech() {
+
         return partOfSpeech;
     }
 
