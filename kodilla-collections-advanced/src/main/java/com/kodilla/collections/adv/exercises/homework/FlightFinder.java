@@ -5,31 +5,28 @@ import java.util.List;
 
 public class FlightFinder {
 
-
     public static List<Flight> findFlightsFrom(String searchedDeparture) {
         List <Flight> departureTable = new ArrayList<>();
-        for(Flight departure : FlightRepository.getFlightsTable()) {
-            if(departure.equals(searchedDeparture)) {
-                //jak dodać element z listy flightsTable do tej drugiej listy, jeśli spełnia warunek?
-                //czemu nie rozpoznaje mi parametrów departure i arrival?
-                departureTable.add(new Flight(departure, arrival));
+        for(Flight flight : FlightRepository.getFlightsTable()) {
+            if(flight.getDeparture().equals(searchedDeparture)) {
+                departureTable.add(flight);
             }
-            else {
-                System.out.println("No flights from the given destination.");
-            }
+        }
+        if(departureTable.size() == 0) {
+            System.out.println("There are no flights from that destination.");
         }
         return departureTable;
     }
 
     public static List<Flight> findFlightsTo(String searchedArrival) {
         List <Flight> arrivalTable = new ArrayList<>();
-        for(Flight arrival : FlightRepository.getFlightsTable()) {
-            if(arrival.equals(searchedArrival)) {
-                arrivalTable.add(new Flight(departure, arrival));
+        for(Flight flight : FlightRepository.getFlightsTable()) {
+            if(flight.getArrival().equals(searchedArrival)) {
+                arrivalTable.add(flight);
             }
-            else {
-                System.out.println("No flights to the given destination.");
-            }
+        }
+        if(arrivalTable.size() == 0) {
+            System.out.println("There are no flights to that destination.");
         }
         return arrivalTable;
     }

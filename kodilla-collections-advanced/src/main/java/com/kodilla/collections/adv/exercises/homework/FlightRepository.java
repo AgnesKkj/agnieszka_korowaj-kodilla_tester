@@ -16,5 +16,4 @@ public class FlightRepository {
         flightsTable.add(new Flight("Paris", "Warsaw"));
         return flightsTable;
     }
-
 }

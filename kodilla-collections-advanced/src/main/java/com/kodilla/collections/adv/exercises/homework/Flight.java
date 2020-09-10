@@ -12,6 +12,7 @@ public class Flight {
     }
 
     public String getDeparture() {
+
         return departure;
     }
 
@@ -31,11 +32,13 @@ public class Flight {
 
     @Override
     public int hashCode() {
+
         return Objects.hash(getDeparture(), getArrival());
     }
 
     @Override
     public String toString() {
+
         return "From: " + departure + "to: " + arrival;
     }
 }

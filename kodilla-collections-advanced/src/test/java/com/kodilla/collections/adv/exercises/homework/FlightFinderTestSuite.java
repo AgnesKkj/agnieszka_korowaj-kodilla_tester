@@ -7,8 +7,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FlightFinderTestSuite {
 
-    List<Flight> flightsTable = new ArrayList<>();
-
     @Test
     public void doesAddTheRightFlights() {
         //when
@@ -31,7 +29,7 @@ class FlightFinderTestSuite {
         List<Flight> expectedFlights = new ArrayList<>();
         expectedFlights.add(new Flight("London", "Paris"));
         expectedFlights.add(new Flight("London", "Cracow"));
-        assertEquals(2, result.size());
+        assertEquals(expectedFlights, FlightFinder.findFlightsFrom("London"));
     }
 
     @Test
@@ -42,8 +40,17 @@ class FlightFinderTestSuite {
         List<Flight> expectedFlights = new ArrayList<>();
         expectedFlights.add(new Flight("London", "Paris"));
         expectedFlights.add(new Flight("Cracow", "Paris"));
-        assertEquals(2, result.size());
+        assertEquals(expectedFlights, FlightFinder.findFlightsTo("Paris"));
     }
 
-
+    @Test
+    public void doesFailToReturnIfNothingFound() {
+        //when
+        List <Flight> resultDep = FlightFinder.findFlightsFrom("Dubai");
+        List <Flight> resultArr = FlightFinder.findFlightsTo("Dubai");
+        //then
+        List<Flight> expectedFlights = new ArrayList<>();
+        assertEquals(expectedFlights, resultDep);
+        assertEquals(expectedFlights, resultArr);
+    }
 }
