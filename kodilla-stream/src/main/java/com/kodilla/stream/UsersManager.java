@@ -1,5 +1,7 @@
 package com.kodilla.stream;
 
+import java.util.stream.Collectors;
+
 public class UsersManager {
 
     public static String getUserName(User user) {
@@ -14,15 +16,13 @@ public class UsersManager {
         UsersRepository.getUsersList()
                 //inicjuje stream
                 .stream()
-
                 //pojawia się "wyrażenie lambda" - bijekcja z tymczasowej zmiennej reprezentującej listę w nowy typ danych
-                //.map(u -> u.getUsername())
-
+                .filter(u -> u.getGroup().equals("Chemists"))
                 //zapis :: - referencja klasa::metoda
                 .map(UsersManager::getUserName)
-
-                //drukowanie każdego obiektu typu String otrzymanego w 11
+                .collect(Collectors.toList())
                 .forEach(un -> System.out.println(un));
+
     }
 
     //architektura wyr. lambda
