@@ -18,12 +18,18 @@ public class Task {
         return name;
     }
 
+
     public LocalDate getOpened() {
         return opened;
     }
 
+
     public LocalDate getDeadline() {
         return deadline;
+    }
+
+    public void setDeadline(LocalDate deadline) {
+        this.deadline = deadline;
     }
 
     @Override
