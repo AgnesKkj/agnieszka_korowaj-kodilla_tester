@@ -6,11 +6,19 @@ import java.util.Set;
 public class Warehouse {
     //kolekcja zamówień
     private static Set<Order> orderList = new HashSet<>();
+    private static Order order;
 
     public static Order addOrder(Order order) {
         orderList.add(order);
         System.out.println("Order " + order + " added.");
         return order;
+    }
+
+    public static boolean isInTheWarehouse(String order) throws OrderDoesntExistException {
+        if(orderList.contains(order)) {
+            return true;
+        }
+        throw new OrderDoesntExistException();
     }
 
     public static void getOrder(String number) {
@@ -19,13 +27,5 @@ public class Warehouse {
                 .stream()
                 .filter(un -> un.getNumber().equals(number))
                 .forEach(um -> System.out.println("Found order: " + um));
-
-        try {
-            throw new OrderDoesntExistException();
-        } catch (OrderDoesntExistException e) {
-            System.out.println("Order not found.");
-        } finally {
-            System.out.println(orderList);
-        }
     }
 }

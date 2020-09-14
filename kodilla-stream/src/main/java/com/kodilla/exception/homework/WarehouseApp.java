@@ -9,5 +9,20 @@ public class WarehouseApp {
         Warehouse.getOrder("2");
         Warehouse.getOrder("3");
         Warehouse.getOrder("5");
+
+        try {
+            Warehouse.isInTheWarehouse("3");
+            throw new OrderDoesntExistException();
+        } catch (OrderDoesntExistException e) {
+            System.out.println("Order not found.");
+        }
+
+        try {
+            Warehouse.isInTheWarehouse("5");
+            throw new OrderDoesntExistException();
+        } catch (OrderDoesntExistException e) {
+            System.out.println("Order not found.");
+        }
+
     }
 }
