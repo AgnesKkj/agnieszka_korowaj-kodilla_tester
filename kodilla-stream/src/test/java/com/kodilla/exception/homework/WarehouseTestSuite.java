@@ -27,6 +27,7 @@ public class WarehouseTestSuite {
         Warehouse.getOrder("3");
         //then
         Order expectedOrder = null;
+        assertEquals(expectedOrder.getNumber(), Warehouse.getOrder("3").getNumber());
         assertNotEquals(expectedOrder.getNumber(), Warehouse.getOrder("2").getNumber());
     }
 }
