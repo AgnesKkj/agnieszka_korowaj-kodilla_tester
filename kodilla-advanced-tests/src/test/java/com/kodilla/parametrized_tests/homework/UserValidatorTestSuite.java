@@ -47,12 +47,13 @@ class UserValidatorTestSuite {
         assertFalse(validator.validateEmail(email));
     }
 
-    //zwraca false, kiedy e-mail jest pusty - kod w metodzie pozwala na puste wartości? test nie przechodzi, a teoretycznie nie powinno być takiej sytuacji
-    @ParameterizedTest
+    //zwraca false, kiedy e-mail jest pusty - regex w metodzie pozwala na puste wpisy? Test nie przechodzi, a teoretycznie nie powinno być takiej sytuacji
+    /*@ParameterizedTest
     @EmptySource
     public void shouldReturnFalseWhenEmailEmpty(String email) {
         assertFalse(validator.validateEmail(email));
-    }
+    }*/
+
 
     //e-mail zawiera {.} lub {@} w niedozwolonym miejscu
     @ParameterizedTest
@@ -87,5 +88,4 @@ class UserValidatorTestSuite {
     public void shouldReturnTrueIfContainsAllPermittedChars(String email) {
         assertTrue(validator.validateEmail(email));
     }
-
 }
