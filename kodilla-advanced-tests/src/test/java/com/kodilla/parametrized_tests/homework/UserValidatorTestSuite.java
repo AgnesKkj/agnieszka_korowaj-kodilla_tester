@@ -48,11 +48,11 @@ class UserValidatorTestSuite {
     }
 
     //zwraca false, kiedy e-mail jest pusty - kod w metodzie pozwala na puste wartości? test nie przechodzi, a teoretycznie nie powinno być takiej sytuacji
-    /*@ParameterizedTest
+    @ParameterizedTest
     @EmptySource
     public void shouldReturnFalseWhenEmailEmpty(String email) {
         assertFalse(validator.validateEmail(email));
-    }*/
+    }
 
     //e-mail zawiera {.} lub {@} w niedozwolonym miejscu
     @ParameterizedTest
