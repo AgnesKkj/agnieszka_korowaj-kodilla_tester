@@ -10,7 +10,13 @@ class UserValidatorTestSuite {
 
     private UserValidator validator = new UserValidator();
 
-    //testowana metoda nie obsługuje przypadku null, a test nie chce przyjąć adnotacji "throw NullPointerException"
+    //testowana metoda nie obsługuje przypadku null, test nie przyjmuje adnotacji
+    /*@ParameterizedTest (expected =  NullPointerException.class)
+    @NullSource
+    public void shouldReturnFalseWhenUsernameNull_withException(String username) throws NullPointerException {
+        assertFalse(validator.validateUsername(username));
+    }*/
+
     @ParameterizedTest
     @EmptySource
     public void shouldReturnFalseWhenUsernameEmpty(String username) {
@@ -44,10 +50,10 @@ class UserValidatorTestSuite {
     @ParameterizedTest
     @NullSource
     public void shouldReturnFalseWhenEmailNull(String email) {
+
         assertFalse(validator.validateEmail(email));
     }
 
-    //zwraca false, kiedy e-mail jest pusty - regex w metodzie pozwala na puste wpisy? Test nie przechodzi, a teoretycznie nie powinno być takiej sytuacji
     /*@ParameterizedTest
     @EmptySource
     public void shouldReturnFalseWhenEmailEmpty(String email) {
@@ -57,8 +63,9 @@ class UserValidatorTestSuite {
 
     //e-mail zawiera {.} lub {@} w niedozwolonym miejscu
     @ParameterizedTest
-    @CsvSource(value = {"user1:yah.oo:com", "us@er1:yah.oo:c.om"}, delimiter = ':')
+    @ValueSource(strings = {"use@r1@yah.oo.com", "us.er1@ya@h.oo.c.om"})
     public void shouldReturnFalseWhenForbiddenChars(String email) {
+
         assertFalse(validator.validateEmail(email));
     }
 
@@ -66,12 +73,13 @@ class UserValidatorTestSuite {
     @ParameterizedTest
     @ValueSource(strings = {"u$er!@gm21l.com", "us%+@h0,,-.org"})
     public void shouldReturnFalseIfContainsForbiddenChars(String email) {
+
         assertFalse(validator.validateEmail(email));
     }
 
     //Domena poza dozwoloną liczbą znaków {0,7}
     @ParameterizedTest
-    @CsvSource(value = {"user123@gmail.", "user345@gmail.comcomco"}, delimiter = ':')
+    @ValueSource (strings = {"user123@gmail.", "user345@gmail.comcomco"})
     public void shouldReturnFalseIfDomainEmptyOrTooManyChars(String email) {
         assertFalse(validator.validateEmail(email));
     }
