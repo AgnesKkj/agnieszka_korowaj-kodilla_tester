@@ -1,41 +1,62 @@
 package com.kodilla.parametrized_tests.homework;
 
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
-import org.junit.jupiter.params.provider.CsvSource;
-
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 class GamblingMachineTestSuite {
 
     GamblingMachine gamblingMachine = new GamblingMachine();
 
-    //przypadki, w których ma rzucić wyjątek
+//przypadki, w których ma rzucić wyjątek
     @ParameterizedTest
     @CsvFileSource(resources = "/randomNumbersToFail.csv")
     public void shouldThrowExceptionWithInvalidNumbersProvided(String numbers) {
-        Set<Integer> expectedNumbers = new HashSet<>();
-        //???
-        expectedNumbers.add(Integer.parseInt(numbers));
-        Assertions.assertThrows(InvalidNumbersException.class, () -> gamblingMachine.validateNumbers(expectedNumbers));
+        String[] expectedArray = numbers.split(",");
+        Set<Integer> expectedParsed = new HashSet<>();
+        Set<String> expectedSet = new HashSet<>(Arrays.asList(expectedArray));
+        expectedSet
+                .stream()
+                .map(u -> Integer.parseInt(u))
+                .collect(Collectors.toCollection(() -> expectedParsed));
+        Assertions.assertThrows(InvalidNumbersException.class, () -> gamblingMachine.validateNumbers(expectedParsed));
     }
 
     //przypadki, w których ma przejść
     @ParameterizedTest
-    //@CsvSource(value = {"38","23","41","9","43","31"})
     @CsvFileSource(resources = "/randomNumbersToPass.csv")
-    public void shouldNotThrowExceptionWithValidNumbersProvided(String numbers) throws InvalidNumbersException {
-        Set<Integer> expectedNumbers = new HashSet<>();
-        //???
-        expectedNumbers.add(Integer.parseInt(numbers));
-        gamblingMachine.validateNumbers(expectedNumbers);
-        assertEquals(6,gamblingMachine.howManyWins(expectedNumbers));
+    public void shouldPassValidatingMethodWithValidNumbersProvided(String numbers) throws InvalidNumbersException {
+        String[] expectedArray = numbers.split(",");
+        Set<Integer> expectedParsed = new HashSet<>();
+        Set<String> expectedSet = new HashSet<>(Arrays.asList(expectedArray));
+        expectedSet
+                .stream()
+                .map(u -> Integer.parseInt(u))
+                .collect(Collectors.toCollection(() -> expectedParsed));
+        GamblingMachine.validateNumbers(expectedParsed);
+        assertEquals(6,expectedParsed.size());
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/randomNumbersToPass.csv")
+    public void shouldCountWinsWithValidNumbersProvided(String numbers) throws InvalidNumbersException {
+        String[] expectedArray = numbers.split(",");
+        Set<Integer> expectedParsed = new HashSet<>();
+        Set<String> expectedSet = new HashSet<>(Arrays.asList(expectedArray));
+        expectedSet
+                .stream()
+                .map(u -> Integer.parseInt(u))
+                .collect(Collectors.toCollection(() -> expectedParsed));
+        System.out.println("Number of wins: " + gamblingMachine.howManyWins(expectedParsed));
+        assertNotNull(gamblingMachine.howManyWins(expectedParsed));
     }
 
 }

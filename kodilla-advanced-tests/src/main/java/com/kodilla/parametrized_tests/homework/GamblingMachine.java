@@ -17,7 +17,7 @@ public class GamblingMachine {
         }
             return count;
     }
-    void validateNumbers(Set<Integer> numbers) throws InvalidNumbersException {
+    static void validateNumbers(Set<Integer> numbers) throws InvalidNumbersException {
         if (numbers.size() != 6) {
             throw new InvalidNumbersException();
         }
