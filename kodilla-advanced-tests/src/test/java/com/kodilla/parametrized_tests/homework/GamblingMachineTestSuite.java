@@ -18,7 +18,7 @@ class GamblingMachineTestSuite {
 
     //przypadki, w których ma rzucić wyjątek
     @ParameterizedTest
-    @CsvFileSource(resources = "/randomNumbersToPass.csv")
+    @CsvFileSource(resources = "/randomNumbersToFail.csv")
     public void shouldThrowExceptionWithInvalidNumbersProvided(String numbers) {
         Set<Integer> expectedNumbers = new HashSet<>();
         //???
