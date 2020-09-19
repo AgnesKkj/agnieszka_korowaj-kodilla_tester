@@ -9,6 +9,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 class GamblingMachineTestSuite {
 
@@ -33,7 +35,7 @@ class GamblingMachineTestSuite {
         //???
         expectedNumbers.add(Integer.parseInt(numbers));
         gamblingMachine.validateNumbers(expectedNumbers);
-        //bez asercji, bo metoda zwraca void?
+        assertEquals(6,gamblingMachine.howManyWins(expectedNumbers));
     }
 
 }
