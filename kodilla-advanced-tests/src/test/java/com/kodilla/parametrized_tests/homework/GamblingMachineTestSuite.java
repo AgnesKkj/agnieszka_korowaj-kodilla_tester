@@ -46,6 +46,19 @@ class GamblingMachineTestSuite {
     }
 
     @ParameterizedTest
+    @CsvFileSource(resources = "/randomNumbersToFail.csv")
+    public void shouldNotCountWinsWithInvalidNumbersProvided(String numbers) throws InvalidNumbersException {
+        String[] expectedArray = numbers.split(",");
+        Set<Integer> expectedParsed = new HashSet<>();
+        Set<String> expectedSet = new HashSet<>(Arrays.asList(expectedArray));
+        expectedSet
+                .stream()
+                .map(u -> Integer.parseInt(u))
+                .collect(Collectors.toCollection(() -> expectedParsed));
+        Assertions.assertThrows(InvalidNumbersException.class, () -> gamblingMachine.howManyWins(expectedParsed));
+    }
+
+    @ParameterizedTest
     @CsvFileSource(resources = "/randomNumbersToPass.csv")
     public void shouldCountWinsWithValidNumbersProvided(String numbers) throws InvalidNumbersException {
         String[] expectedArray = numbers.split(",");
@@ -58,5 +71,4 @@ class GamblingMachineTestSuite {
         System.out.println("Number of wins: " + gamblingMachine.howManyWins(expectedParsed));
         assertNotNull(gamblingMachine.howManyWins(expectedParsed));
     }
-
 }
