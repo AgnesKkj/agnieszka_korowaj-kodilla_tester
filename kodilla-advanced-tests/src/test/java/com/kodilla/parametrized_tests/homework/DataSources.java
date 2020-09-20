@@ -15,5 +15,14 @@ public class DataSources {
         );
     }
 
+    static Stream<Arguments> provideWrongDataForTestingBMI() {
+        return Stream.of(
+                Arguments.of(new Person(0,0)),
+                Arguments.of(new Person(1.50,0)),
+                Arguments.of(new Person(0,50))
+
+        );
+    }
+
 
 }
