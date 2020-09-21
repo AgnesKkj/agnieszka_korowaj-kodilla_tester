@@ -23,5 +23,4 @@ public interface Localization {
     }
     void removeSubscriber(Person person);
     void emptyLocalization();
-
 }

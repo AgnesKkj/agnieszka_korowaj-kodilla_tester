@@ -5,8 +5,8 @@ import org.mockito.Mockito;
 class LocalizationTestSuite {
 
     Localization localizationOne = new LocalizationOne();
-    Localization localizationTwo = new LocalizationOne();
-    Localization localizationThree = new LocalizationOne();
+    Localization localizationTwo = new LocalizationTwo();
+    Localization localizationThree = new LocalizationThree();
     Person personOne = Mockito.mock(Person.class);
     Person personTwo = Mockito.mock(Person.class);
     WeatherNotification weatherNotification = Mockito.mock(WeatherNotification.class);
@@ -18,13 +18,11 @@ class LocalizationTestSuite {
         Mockito.verify(personOne, Mockito.never()).receive(weatherNotification);
     }
 
-    //osoba otrzymuje właściwe notyfikacje, jeśli zapisała się do >= 1 lokalizacji
+    //osoba otrzymuje notyfikacje z właściwej lokalizacji
     @Test
-    public void subscribedPersonShouldReceiveTheRightNotification() {
+    public void subscribedPersonShouldReceiveTheRightNotificationFromEachLocalization() {
         localizationOne.addSubscriber(personOne);
         localizationOne.sendLocOneNotification(weatherNotification);
-        Mockito.verify(personOne, Mockito.times(1)).receive(weatherNotification);
-        localizationThree.addSubscriber(personOne);
         localizationThree.sendLocThreeNotification(weatherNotification);
         Mockito.verify(personOne, Mockito.times(1)).receive(weatherNotification);
     }
