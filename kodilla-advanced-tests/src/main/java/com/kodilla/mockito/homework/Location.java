@@ -1,6 +1,6 @@
 package com.kodilla.mockito.homework;
 
-public interface Localization {
+public interface Location {
 
     WeatherNotification defaultNotification = new WeatherNotification("Make sure to read our Terms of Service.");
 
@@ -10,13 +10,13 @@ public interface Localization {
     void sendLocThreeNotification(WeatherNotification locThreeWeatherNotification);
 
     static void sendDefaultNotification(WeatherNotification defaultNotification) {
-        for (Person person : LocalizationOne.locOneSubscribers) {
+        for (Person person : LocationOne.locOneSubscribers) {
             person.receive(defaultNotification);
         }
-        for (Person person : LocalizationTwo.locTwoSubscribers) {
+        for (Person person : LocationTwo.locTwoSubscribers) {
             person.receive(defaultNotification);
         }
-        for (Person person : LocalizationThree.locThreeSubscribers) {
+        for (Person person : LocationThree.locThreeSubscribers) {
             person.receive(defaultNotification);
         }
 

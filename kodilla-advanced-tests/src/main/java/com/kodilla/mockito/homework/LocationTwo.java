@@ -1,11 +1,9 @@
 package com.kodilla.mockito.homework;
 
-import com.kodilla.notification.Notification;
-
 import java.util.HashSet;
 import java.util.Set;
 
-public class LocalizationTwo implements Localization {
+public class LocationTwo implements Location {
 
     static Set<Person> locTwoSubscribers = new HashSet<>();
     WeatherNotification locTwoNotification = new WeatherNotification("Notification from Localization Two");
@@ -35,7 +33,7 @@ public class LocalizationTwo implements Localization {
     }
 
     public void emptyLocalization() {
-        locTwoSubscribers.removeAll(locTwoSubscribers);
+        locTwoSubscribers.clear();
     }
 
 }

@@ -3,10 +3,10 @@ package com.kodilla.mockito.homework;
 import java.util.HashSet;
 import java.util.Set;
 
-public class LocalizationOne implements Localization {
+public class LocationOne implements Location {
 
     static Set<Person> locOneSubscribers = new HashSet<>();
-    WeatherNotification locOneNotification = new WeatherNotification("Notification from Localization One");
+    WeatherNotification locOneNotification = new WeatherNotification("Notification from Location One");
 
     public void addSubscriber(Person person) {
 
@@ -33,7 +33,7 @@ public class LocalizationOne implements Localization {
 
     @Override
     public void emptyLocalization() {
-        locOneSubscribers.removeAll(locOneSubscribers);
+        locOneSubscribers.clear();
     }
 
 
