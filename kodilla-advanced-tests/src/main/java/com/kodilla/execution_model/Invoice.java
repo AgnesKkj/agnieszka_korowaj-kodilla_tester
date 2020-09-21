@@ -19,6 +19,7 @@ public class Invoice {
 
     //opróżniamy listę
     public void clear() {
+
         this.items.clear();
     }
 
