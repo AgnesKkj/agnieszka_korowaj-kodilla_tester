@@ -6,7 +6,6 @@ import java.util.Set;
 public class LocalizationThree implements Localization {
     static Set<Person> locThreeSubscribers = new HashSet<>();
     WeatherNotification locThreeNotification = new WeatherNotification("Notification from Localization Three");
-    WeatherNotification defaultNotification = new WeatherNotification("Make sure to read our Terms of Service.");
 
     public void addSubscriber(Person person) {
         locThreeSubscribers.add(person);

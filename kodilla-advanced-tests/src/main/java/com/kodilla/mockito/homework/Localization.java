@@ -9,7 +9,7 @@ public interface Localization {
     void sendLocTwoNotification(WeatherNotification locTwoWeatherNotification);
     void sendLocThreeNotification(WeatherNotification locThreeWeatherNotification);
 
-    static void sendDefaultNotification(WeatherNotification defaultWeatherNotification) {
+    static void sendDefaultNotification(WeatherNotification defaultNotification) {
         for (Person person : LocalizationOne.locOneSubscribers) {
             person.receive(defaultNotification);
         }

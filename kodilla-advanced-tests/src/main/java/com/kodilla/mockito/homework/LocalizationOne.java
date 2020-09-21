@@ -9,11 +9,11 @@ public class LocalizationOne implements Localization {
     WeatherNotification locOneNotification = new WeatherNotification("Notification from Localization One");
 
     public void addSubscriber(Person person) {
+
         locOneSubscribers.add(person);
     }
 
     public void sendLocOneNotification(WeatherNotification locOneNotification) {
-
         locOneSubscribers.forEach(person -> person.receive(locOneNotification));
     }
 
@@ -27,6 +27,7 @@ public class LocalizationOne implements Localization {
 
     @Override
     public void removeSubscriber(Person person) {
+
         locOneSubscribers.remove(person);
     }
 

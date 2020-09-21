@@ -9,37 +9,32 @@ class LocalizationTestSuite {
     Localization localizationThree = new LocalizationOne();
     Person personOne = Mockito.mock(Person.class);
     Person personTwo = Mockito.mock(Person.class);
-    WeatherNotification locOneNotification = Mockito.mock(WeatherNotification.class);
-    WeatherNotification locTwoNotification = Mockito.mock(WeatherNotification.class);
-    WeatherNotification locThreeNotification = Mockito.mock(WeatherNotification.class);
-    WeatherNotification defaultNotification = Mockito.mock(WeatherNotification.class);
+    WeatherNotification weatherNotification = Mockito.mock(WeatherNotification.class);
 
     //osoba nie otrzymuje powiadomień, jeśli nie zapisała się do żadnej lokalizacji
     @Test
     public void notSubscribedPersonShouldNotReceiveNotification() {
-        localizationOne.sendLocOneNotification(locOneNotification);
-        Mockito.verify(personOne, Mockito.never()).receive(locOneNotification);
+        localizationOne.sendLocOneNotification(weatherNotification);
+        Mockito.verify(personOne, Mockito.never()).receive(weatherNotification);
     }
 
     //osoba otrzymuje właściwe notyfikacje, jeśli zapisała się do >= 1 lokalizacji
     @Test
     public void subscribedPersonShouldReceiveTheRightNotification() {
         localizationOne.addSubscriber(personOne);
-        localizationOne.sendLocOneNotification(locOneNotification);
-        Mockito.verify(personOne, Mockito.times(1)).receive(locOneNotification);
+        localizationOne.sendLocOneNotification(weatherNotification);
+        Mockito.verify(personOne, Mockito.times(1)).receive(weatherNotification);
         localizationThree.addSubscriber(personOne);
-        localizationThree.sendLocThreeNotification(locThreeNotification);
-        Mockito.verify(personOne, Mockito.times(1)).receive(locThreeNotification);
+        localizationThree.sendLocThreeNotification(weatherNotification);
+        Mockito.verify(personOne, Mockito.times(1)).receive(weatherNotification);
     }
 
     //osoba nie otrzymuje powiadomień z niewłaściwej lokalizacji
     @Test
     public void subscribedPersonShouldNotReceiveOtherNotifications() {
         localizationOne.addSubscriber(personOne);
-        localizationTwo.sendLocTwoNotification(locTwoNotification);
-        Mockito.verify(personOne, Mockito.never()).receive(locTwoNotification);
-        localizationThree.sendLocThreeNotification(locThreeNotification);
-        Mockito.verify(personOne, Mockito.never()).receive(locThreeNotification);
+        localizationTwo.sendLocTwoNotification(weatherNotification);
+        Mockito.verify(personOne, Mockito.never()).receive(weatherNotification);
     }
 
     //osoba przestaje otrzymywać notyfikacje, jeśli wypisuje się z >=1 lokalizacji
@@ -49,23 +44,21 @@ class LocalizationTestSuite {
         localizationTwo.addSubscriber(personOne);
         localizationOne.removeSubscriber(personOne);
         localizationTwo.removeSubscriber(personOne);
-        localizationOne.sendLocOneNotification(locOneNotification);
-        localizationTwo.sendLocTwoNotification(locTwoNotification);
-        Mockito.verify(personOne, Mockito.never()).receive(locOneNotification);
-        Mockito.verify(personOne, Mockito.never()).receive(locTwoNotification);
+        localizationOne.sendLocOneNotification(weatherNotification);
+        localizationTwo.sendLocTwoNotification(weatherNotification);
+        Mockito.verify(personOne, Mockito.never()).receive(weatherNotification);
+        Mockito.verify(personOne, Mockito.never()).receive(weatherNotification);
     }
 
     //test "usunięcia" lokalizacji (opróżnienia kolekcji)
     @Test
-    public void localizationStopsSendingNotificationsWhenEmpty() {
+    public void localizationDoesNotSendNotificationsWhenEmpty() {
         localizationOne.addSubscriber(personOne);
         localizationOne.addSubscriber(personTwo);
-        localizationOne.sendLocOneNotification(locOneNotification);
-        Mockito.verify(personOne, Mockito.times(1)).receive(locOneNotification);
         localizationOne.emptyLocalization();
-        localizationOne.sendLocOneNotification(locOneNotification);
-        Mockito.verify(personOne, Mockito.never()).receive(locOneNotification);
-        Mockito.verify(personTwo, Mockito.never()).receive(locOneNotification);
+        localizationOne.sendLocOneNotification(weatherNotification);
+        Mockito.verify(personOne, Mockito.never()).receive(weatherNotification);
+        Mockito.verify(personTwo, Mockito.never()).receive(weatherNotification);
     }
 
     //system wysyła specjalne powiadomienie do wszystkich
@@ -73,17 +66,17 @@ class LocalizationTestSuite {
     public void defaultNotificationSentToAll() {
         localizationOne.addSubscriber(personOne);
         localizationOne.addSubscriber(personTwo);
-        Localization.sendDefaultNotification(defaultNotification);
-        Mockito.verify(personOne, Mockito.times(1)).receive(defaultNotification);
-        Mockito.verify(personTwo, Mockito.times(1)).receive(defaultNotification);
+        Localization.sendDefaultNotification(weatherNotification);
+        Mockito.verify(personOne, Mockito.times(1)).receive(weatherNotification);
+        Mockito.verify(personTwo, Mockito.times(1)).receive(weatherNotification);
     }
 
     //powiadomienie "do wszystkich" nie dociera do osób niezapisanych do żadnej lokalizacji
     @Test
     public void nobodyGetsDefaultNotificationIfNobodySubscribed() {
-        Localization.sendDefaultNotification(defaultNotification);
-        Mockito.verify(personOne, Mockito.never()).receive(defaultNotification);
-        Mockito.verify(personTwo, Mockito.never()).receive(defaultNotification);
+        Localization.sendDefaultNotification(weatherNotification);
+        Mockito.verify(personOne, Mockito.never()).receive(weatherNotification);
+        Mockito.verify(personTwo, Mockito.never()).receive(weatherNotification);
     }
 
 }

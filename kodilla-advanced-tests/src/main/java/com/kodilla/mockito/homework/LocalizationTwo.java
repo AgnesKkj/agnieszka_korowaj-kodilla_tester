@@ -9,7 +9,6 @@ public class LocalizationTwo implements Localization {
 
     static Set<Person> locTwoSubscribers = new HashSet<>();
     WeatherNotification locTwoNotification = new WeatherNotification("Notification from Localization Two");
-    WeatherNotification defaultNotification = new WeatherNotification("Make sure to read our Terms of Service.");
 
     public void addSubscriber(Person person) {
         locTwoSubscribers.add(person);
