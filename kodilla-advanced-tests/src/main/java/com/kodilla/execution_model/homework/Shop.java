@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 public class Shop {
 
     private Set<Order> orderList = new HashSet<>();
-    private List<Order> filteredOrders = new ArrayList<>();
 
     public void addOrder(Order order) {
         System.out.println(order);
@@ -24,39 +23,63 @@ public class Shop {
         orderList.add(order);
     }
 
-    public List<Order> filterOrdersByDate() {
-        filteredOrders = orderList
+    public List<Order> getOrdersByDateRange(LocalDate dateFrom, LocalDate dateTo) {
+        if(dateFrom.isAfter(dateTo)) {
+            System.out.println("Wrong date range. The date from must be before the date to.");
+            return null;
+        }
+        else if(dateFrom.isAfter(LocalDate.now()) || dateTo.isAfter(LocalDate.now())) {
+            System.out.println("Wrong date range. Please provide dates up to the present date.");
+            return null;
+        }
+        System.out.println("Searching for orders by date from " + dateFrom + " to " + dateTo + "...");
+        List<Order> ordersByDate = orderList
                 .stream()
-                .filter(u -> u.getOrderDate().isAfter(LocalDate.now().minusDays(2)))
+                .filter(u -> u.getOrderDate().isAfter(dateFrom.minusDays(1)))
+                .filter(un -> un.getOrderDate().isBefore(dateTo.plusDays(1)))
                 .collect(Collectors.toList());
-        System.out.println(filteredOrders);
-        for(Order order : orderList) {
-            if (filteredOrders.contains(order)) {
-                return filteredOrders;
-            }
+        if (ordersByDate.isEmpty()) {
+            System.out.println("No orders in given date range.");
+            return null;
         }
-        System.out.println("No orders in the requested date range.");
-        return null;
+        System.out.println(ordersByDate);
+        return ordersByDate;
     }
 
-    public double returnsMinValueOfFilteredOrders() {
-        if (filteredOrders.isEmpty()) {
-            System.out.println("No records to filter.");
-            return 0;
+    public List<Order> getOrdersByMinMaxValue(double minValue, double maxValue) {
+        if(minValue > maxValue) {
+            System.out.println("Wrong value range. The minimal value must be smaller than the maximal value.");
+            return null;
         }
-        Order minOrder = Collections.min(filteredOrders, Comparator.comparing(n -> n.getValue()));
-        System.out.println("Smallest order value filtered: " + minOrder.getValue());
-        return minOrder.getValue();
+        else if (minValue < 0 || maxValue < 0) {
+            System.out.println("Wrong value range. Given values cannot be negative.");
+            return null;
+        }
+        System.out.println("Searching orders by value from " + minValue + " to " + maxValue + "...");
+        List<Order> ordersByValue = orderList
+                .stream()
+                .filter(u -> u.getValue() >= minValue)
+                .filter(un -> un.getValue() <= maxValue)
+                .collect(Collectors.toList());
+        if (ordersByValue.isEmpty()) {
+            System.out.println("No orders in given value range.");
+            return null;
+        }
+        System.out.println(ordersByValue);
+        return ordersByValue;
     }
 
-    public double returnsMaxValueOfFilteredOrders() {
-        if (filteredOrders.isEmpty()) {
-            System.out.println("No records to filter.");
+    public double sumOrders() {
+        if (orderList.size() == 0) {
+            System.out.println("No orders to sum up.");
             return 0;
         }
-        Order maxOrder = Collections.max(filteredOrders, Comparator.comparing(n -> n.getValue()));
-        System.out.println("Greatest order value filtered: " + maxOrder.getValue());
-        return maxOrder.getValue();
+        double sum = 0;
+        for (Order order : this.orderList) {
+            sum += order.getValue();
+        }
+        System.out.println("Order value total:  " + sum);
+        return sum;
     }
 
     public int getSize() {
@@ -68,29 +91,5 @@ public class Shop {
         System.out.println("Order list cleared!");
         orderList.clear();
     }
-
-    public double sumOrders() {
-        if (orderList.size() != 0) {
-
-            double sum = 0;
-            for (Order order : this.orderList) {
-                sum += order.getValue();
-            }
-            System.out.println("Order value total:  " + sum);
-            return sum;
-        }
-        System.out.println("No orders to sum up.");
-        return 0;
-    }
-
-
-    //zwrócenie listy z zakresu dwóch dat
-    //pobranie listy na podstawie przekazanego zakresu
-    //zwrócenie liczby zamówień
-    //suma wartości wszystkich zamówień
-
-    
-    //zakres dwóch dat - dwie daty wstecz od now, jeśli można je odnaleźć?
-
 
 }

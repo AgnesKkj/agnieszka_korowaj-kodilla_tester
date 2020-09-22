@@ -1,21 +1,17 @@
-
 package com.kodilla.execution_model.homework;
-
 import org.junit.jupiter.api.*;
 import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ShopTestSuite {
 
-    static final LocalDate now = LocalDate.now();
-
     Shop shop = new Shop();
-    Order laptop = new Order(750.50,LocalDate.now().minusDays(1),"BrianDG");
+    Order laptop = new Order(750.50,LocalDate.of(2020,9,21),"BrianDG");
     Order table = new Order(500.00, LocalDate.of(2020,9,22),".#notWaltWhite#.");
     Order labGlassware = new Order(1500.00, LocalDate.of(2020,9,12), ".#notWaltWhite#.");
-    Order microphone = new Order(100.00, LocalDate.now().minusDays(1),"rEtSuKo93");
+    Order microphone = new Order(100.00, LocalDate.of(2020,9,18),"rEtSuKo93");
     Order lamp = new Order(250.00, LocalDate.of(2020,9,20), "Margette");
-    Order carpet = new Order(450.00, LocalDate.now(),"Sultan_Jaff");
+    Order carpet = new Order(450.00, LocalDate.of(2020,9,22),"Sultan_Jaff");
     Order bustStatue = new Order(600,LocalDate.of(2020,9,18), "DahliaEightyNine");
 
     //czy zwiększa size() po dodaniu podanych obiektów do kolekcji,
@@ -35,7 +31,6 @@ class ShopTestSuite {
     //czy zatrzymuje dodanie obiektu o dacie późniejszej od now,
     @Test
     public void shouldNotAddObjectIfOrderDateAfterNow() {
-        System.out.println("Now: " + now);
         shop.addOrder(new Order(100.05,LocalDate.now().plusDays(3),"AfterToday"));
         assertEquals(7, shop.getSize());
     }
@@ -52,67 +47,69 @@ class ShopTestSuite {
     //czy zwraca prawidłową listę obiektów dla dat mieszczących się w dozwolonym zakresie,
     @Test
     public void shouldReturnFilteredObjectListByPermittedDates() {
-        System.out.println("Now is: " + now);
-        shop.clear();
-        shop.addOrder(laptop);
-        shop.addOrder(microphone);
-        assertEquals(2,shop.filterOrdersByDate().size());
+        assertEquals(3,shop.getOrdersByDateRange(LocalDate.of(2020,9,15), LocalDate.of(2020,9,20)).size());
     }
 
     //czy zwraca null/ alternatywną wiadomość, jeśli nie ma zamówień w podanym zakresie dat,
     @Test
-    public void shouldReturnNullAndMessageIfNoObjectsPassFiltering() {
+    public void shouldReturnNullAndMessageIfNoObjectsInGivenDateRange() {
         shop.clear();
-        shop.addOrder(bustStatue);
-        assertNull(shop.filterOrdersByDate());
+        assertNull(shop.getOrdersByDateRange(LocalDate.of(2020,9,1), LocalDate.of(2020,9,19)));
     }
 
-    //czy nie zwraca obiektów za daleko wstecz
+    //czy zwraca nul zakresu za daleko wstecz
     @Test
-    public void shouldReturnNullWhenObjectDateBeforePermitted() {
-        System.out.println("Now is: " + now);
+    public void shouldReturnNullWhenObjectDateFromBeforePermitted() {
         shop.clear();
-        shop.addOrder(new Order(300,LocalDate.now().minusDays(2),"TooEarly"));
-        assertNull(shop.filterOrdersByDate());
+        shop.addOrder(new Order(200, LocalDate.of(2020,8,31), "test"));
+        assertNull(shop.getOrdersByDateRange(LocalDate.of(2020,9,1), LocalDate.of(2020,9,19)));
     }
 
-    //analogicznie: czy nie zwraca obiektu z przyszłości
+    //czy zwraca null przy dacie za daleko w przód
     @Test
-    public void shouldReturnNullWhenObjectDateAfterNow() {
-        System.out.println("Now is: " + now);
+    public void shouldReturnNullWhenObjectDateToAfterPermitted() {
         shop.clear();
-        shop.addOrder(new Order(300,LocalDate.now().plusDays(1),"InTheFuture"));
-        assertNull(shop.filterOrdersByDate());
+        shop.addOrder(new Order(200, LocalDate.of(2020,9,20), "test"));
+        assertNull(shop.getOrdersByDateRange(LocalDate.of(2020,9,1), LocalDate.of(2020,9,19)));
     }
 
-    //czy zwraca 0/ zatrzymuje każdą z tych metod przy podanym pustym zakresie,
+    //czy zwraca null, kiedy dateFrom jest późniejsza niż dateTo
     @Test
-    public void shouldReturnZeroAndMessageWhenLookingForMinMaxValuesIfNoOrdersInFilteredRange() {
+    public void shouldReturnNullWhenDateFromIsAfterDateTo() {
         shop.clear();
-        shop.addOrder(bustStatue);
-        assertEquals(0,shop.returnsMinValueOfFilteredOrders());
-        assertEquals(0,shop.returnsMaxValueOfFilteredOrders());
+        assertNull(shop.getOrdersByDateRange(LocalDate.of(2020,9,10), LocalDate.of(2020,9,3)));
     }
 
-    //czy z podanego zakresu zwraca poprawną wartość min
+    //czy zwraca null, kiedy dateFrom lub dateTo wypadają w przyszłości
     @Test
-    public void shouldReturnTheRightMinValueOfFilteredOrders() {
-        System.out.println(shop.filterOrdersByDate());
-        assertEquals(100,shop.returnsMinValueOfFilteredOrders());
+    public void shouldReturnNullWhenDatesAreAfterNow() {
+        assertNull(shop.getOrdersByDateRange(LocalDate.of(2020,9,10), LocalDate.now().plusDays(3)));
+        assertNull(shop.getOrdersByDateRange(LocalDate.now().plusDays(3), LocalDate.now().plusDays(5)));
     }
 
-    //czy z podanego zakresu zwraca poprawną wartość max
+    //czy zwraca poprawny zakres zamówień wg min i max wartości,
     @Test
-    public void shouldReturnTheRightMaxValueOfFilteredOrders() {
-        System.out.println(shop.filterOrdersByDate());
-        assertEquals(750.5,shop.returnsMaxValueOfFilteredOrders());
+    public void shouldReturnRightListAccordingToMinMaxRange() {
+        assertEquals(4,shop.getOrdersByMinMaxValue(300,1000).size());
+    }
+
+    //czy zwraca null, kiedy podamy wartość ujemną do wyszukiwania
+    @Test
+    public void shouldReturnNullIfMinOrMaxIsNegative() {
+        assertNull(shop.getOrdersByMinMaxValue(-100,500));
+        assertNull(shop.getOrdersByMinMaxValue(-300,-200));
+    }
+
+    //czy zwraca null, kiedy minValue > maxValue
+    @Test
+    public void shouldReturnNullIfMinGreaterThanMax() {
+        shop.clear();
+        assertNull(shop.getOrdersByMinMaxValue(1000,100));
     }
 
     //czy sumuje poprawnie wartości wszystkich zamówień
     @Test
     public void shouldSumAllOrderValues() {
-        System.out.println(shop.sumOrders());
-        assertEquals(4150.5, shop.sumOrders());
         shop.clear();
         shop.addOrder(table);
         shop.addOrder(labGlassware);
