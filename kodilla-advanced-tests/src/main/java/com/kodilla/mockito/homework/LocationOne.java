@@ -15,6 +15,7 @@ public class LocationOne implements Location {
 
     public void sendLocOneNotification(WeatherNotification locOneNotification) {
         locOneSubscribers.forEach(person -> person.receive(locOneNotification));
+
     }
 
     @Override

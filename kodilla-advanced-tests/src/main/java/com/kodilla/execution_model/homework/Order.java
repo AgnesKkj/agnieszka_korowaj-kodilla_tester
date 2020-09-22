@@ -26,6 +26,10 @@ public class Order {
         return whoOrdered;
     }
 
+    public void setWhoOrdered(String anon) {
+        this.whoOrdered = anon;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -45,4 +49,6 @@ public class Order {
     public String toString() {
         return "Order: value " + value + ", made " + orderDate + " by " + whoOrdered;
     }
+
+
 }

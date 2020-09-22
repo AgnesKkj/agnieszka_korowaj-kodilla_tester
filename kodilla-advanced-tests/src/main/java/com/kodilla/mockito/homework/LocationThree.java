@@ -5,7 +5,7 @@ import java.util.Set;
 
 public class LocationThree implements Location {
     static Set<Person> locThreeSubscribers = new HashSet<>();
-    WeatherNotification locThreeNotification = new WeatherNotification("Notification from Localization Three");
+    WeatherNotification locThreeNotification = new WeatherNotification("Notification from Location Three");
 
     public void addSubscriber(Person person) {
         locThreeSubscribers.add(person);
@@ -21,6 +21,7 @@ public class LocationThree implements Location {
 
     public void sendLocThreeNotification(WeatherNotification locThreeNotification) {
         locThreeSubscribers.forEach(person -> person.receive(locThreeNotification));
+
     }
 
     @Override

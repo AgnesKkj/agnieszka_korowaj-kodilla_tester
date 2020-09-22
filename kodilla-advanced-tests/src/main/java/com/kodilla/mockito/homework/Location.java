@@ -12,12 +12,15 @@ public interface Location {
     static void sendDefaultNotification(WeatherNotification defaultNotification) {
         for (Person person : LocationOne.locOneSubscribers) {
             person.receive(defaultNotification);
+
         }
         for (Person person : LocationTwo.locTwoSubscribers) {
             person.receive(defaultNotification);
+
         }
         for (Person person : LocationThree.locThreeSubscribers) {
             person.receive(defaultNotification);
+
         }
 
     }

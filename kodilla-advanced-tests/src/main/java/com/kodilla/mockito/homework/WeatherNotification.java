@@ -9,6 +9,6 @@ public class WeatherNotification {
 
     @Override
     public String toString() {
-        return content;
+        return "Alert: " + content;
     }
 }
