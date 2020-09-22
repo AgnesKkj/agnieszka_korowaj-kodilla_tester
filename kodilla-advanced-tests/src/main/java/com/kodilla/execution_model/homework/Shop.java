@@ -34,8 +34,9 @@ public class Shop {
             if (filteredOrders.contains(order)) {
                 return filteredOrders;
             }
-            System.out.println("No orders in the requested date range.");
-        } return null;
+        }
+        System.out.println("No orders in the requested date range.");
+        return null;
     }
 
     public double returnsMinValueOfFilteredOrders() {

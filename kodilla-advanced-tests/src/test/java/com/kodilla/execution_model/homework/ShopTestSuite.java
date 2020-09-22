@@ -24,23 +24,17 @@ class ShopTestSuite {
         assertEquals(7, shop.getSize());
     }
 
-    //czy zatrzymuje dodanie obiektu o wartości 0,
+    //czy zatrzymuje dodanie obiektu o wartości 0 lub ujemnej,
     @Test
-    public void shouldNotAddObjectIfValueZero() {
+    public void shouldNotAddObjectIfValueZeroOrNegative() {
         shop.addOrder(new Order(0,LocalDate.of(2020,9,18),"test"));
-        assertEquals(7, shop.getSize());
-    }
-
-    //czy zatrzymuje dodanie obiektu o wartości ujemnej,
-    @Test
-    public void shouldNotAddObjectIfValueNegative() {
         shop.addOrder(new Order(-100,LocalDate.of(2020,9,18),"test"));
         assertEquals(7, shop.getSize());
     }
 
     //czy zatrzymuje dodanie obiektu o dacie późniejszej od now,
     @Test
-    public void shouldNotAddObjectIfLocalDateAfterNow() {
+    public void shouldNotAddObjectIfOrderDateAfterNow() {
         System.out.println("Now: " + now);
         shop.addOrder(new Order(100.05,LocalDate.now().plusDays(3),"AfterToday"));
         assertEquals(7, shop.getSize());
@@ -57,7 +51,7 @@ class ShopTestSuite {
 
     //czy zwraca prawidłową listę obiektów dla dat mieszczących się w dozwolonym zakresie,
     @Test
-    public void shouldReturnObjectsByPermittedDates() {
+    public void shouldReturnFilteredObjectListByPermittedDates() {
         System.out.println("Now is: " + now);
         shop.clear();
         shop.addOrder(laptop);
@@ -67,7 +61,7 @@ class ShopTestSuite {
 
     //czy zwraca null/ alternatywną wiadomość, jeśli nie ma zamówień w podanym zakresie dat,
     @Test
-    public void shouldReturnNullIfNoObjectsPassFiltering() {
+    public void shouldReturnNullAndMessageIfNoObjectsPassFiltering() {
         shop.clear();
         shop.addOrder(bustStatue);
         assertNull(shop.filterOrdersByDate());
@@ -75,7 +69,7 @@ class ShopTestSuite {
 
     //czy nie zwraca obiektów za daleko wstecz
     @Test
-    public void shouldNotReturnWhenObjectDateBeforePermitted() {
+    public void shouldReturnNullWhenObjectDateBeforePermitted() {
         System.out.println("Now is: " + now);
         shop.clear();
         shop.addOrder(new Order(300,LocalDate.now().minusDays(2),"TooEarly"));
@@ -84,7 +78,7 @@ class ShopTestSuite {
 
     //analogicznie: czy nie zwraca obiektu z przyszłości
     @Test
-    public void shouldNotReturnlWhenObjectDateBeforePermitted() {
+    public void shouldReturnNullWhenObjectDateAfterNow() {
         System.out.println("Now is: " + now);
         shop.clear();
         shop.addOrder(new Order(300,LocalDate.now().plusDays(1),"InTheFuture"));
@@ -93,7 +87,7 @@ class ShopTestSuite {
 
     //czy zwraca 0/ zatrzymuje każdą z tych metod przy podanym pustym zakresie,
     @Test
-    public void shouldReturnNullWhenLookingForMinMaxValuesIfNoOrdersInFilteredRange() {
+    public void shouldReturnZeroAndMessageWhenLookingForMinMaxValuesIfNoOrdersInFilteredRange() {
         shop.clear();
         shop.addOrder(bustStatue);
         assertEquals(0,shop.returnsMinValueOfFilteredOrders());
@@ -108,13 +102,11 @@ class ShopTestSuite {
     }
 
     //czy z podanego zakresu zwraca poprawną wartość max
-
     @Test
     public void shouldReturnTheRightMaxValueOfFilteredOrders() {
         System.out.println(shop.filterOrdersByDate());
         assertEquals(750.5,shop.returnsMaxValueOfFilteredOrders());
     }
-
 
     //czy sumuje poprawnie wartości wszystkich zamówień
     @Test
@@ -129,11 +121,10 @@ class ShopTestSuite {
 
     //czy zwraca 0/ wyświetla alternatywną wiadomość przy pustym zakresie,
     @Test
-    public void shouldReturnNullWhenSummingEmptyShop() {
+    public void shouldReturnZeroAndMessageWhenSummingEmptyShop() {
         shop.clear();
         assertEquals(0, shop.sumOrders());
     }
-
 
     @BeforeAll
     public static void displayIntroMessage() {
