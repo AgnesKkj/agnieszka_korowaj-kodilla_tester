@@ -11,8 +11,14 @@ public class WeatherAlertService {
     private WeatherNotification weatherNotification;
 
     public Map<Location, List<Person>> addLocation(Location location) {
+        System.out.println("Adding location.");
         allTheLocations.put(location, new ArrayList<Person>());
         return allTheLocations;
+    }
+
+    public void removeLocation(Location location) {
+        System.out.println("Removing location." );
+        allTheLocations.remove(location);
     }
 
     public void addSubscriber(Person person, Location location) {
@@ -28,11 +34,12 @@ public class WeatherAlertService {
             System.out.println("Adding subscriber to location.");
         }
     }
+
     public void sendNotificationToLocation(Location location) {
         for (Map.Entry<Location, List<Person>> entry : this.allTheLocations.entrySet()) {
             if(entry.getKey().equals(location)) {
                 entry.getValue().forEach(person -> person.receive(weatherNotification));
-        }
+            }
         }
     }
 
@@ -42,6 +49,5 @@ public class WeatherAlertService {
         }
     }
 }
-
 
 
