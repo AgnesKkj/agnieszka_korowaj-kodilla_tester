@@ -14,40 +14,54 @@ public class WeatherAlertServiceTestSuite {
     @Test
     public void notSubscribedPersonShouldNotReceiveNotifications() {
         weatherAlertService.addLocation(location);
-        weatherAlertService.sendNotificationToLocation(location);
-        Mockito.verify(person, Mockito.never().receive(weatherNotification));
+        weatherAlertService.sendNotificationToLocation(weatherNotification, location);
+        Mockito.verify(person, Mockito.never()).receive(weatherNotification);
     }
 
     @Test
-    public void shouldAddSubscriberIfLocationIsPresent() {
+    public void shouldAddLocation() {
+        Location locationTwo = Mockito.mock(Location.class);
+        weatherAlertService.addLocation(locationTwo);
+        weatherAlertService.addSubscriber(person, locationTwo);
+        Mockito.verify(locationTwo, Mockito.times(1)).receiveSubscriber(person);
+    }
+
+
+    @Test
+    public void shouldAddSubscriber() {
         weatherAlertService.addLocation(location);
         weatherAlertService.addSubscriber(person, location);
-        Mockito.verify(location, Mockito.times(1).receiveSubscriber(person));
+        Mockito.verify(location, Mockito.times(1)).receiveSubscriber(person);
     }
 
     @Test
-    public void shouldAddSubscriberWithLocationIfLocationWasNotPresent() {
+    public void subscribedPersonShouldReceiveNotificationFromRightLocation() {
         weatherAlertService.addSubscriber(person, location);
-        Mockito.verify(location, Mockito.times(1).receiveSubscriber(person));
+        weatherAlertService.sendNotificationToLocation(weatherNotification, location);
+        Mockito.verify(person, Mockito.times(1)).receive(weatherNotification);
     }
 
     @Test
-    public void subscribedPersonShouldReceiveNotification() {
+    public void subscribedPersonShouldNotReceiveNotificationFromWrongLocation() {
         weatherAlertService.addSubscriber(person, location);
-        weatherAlertService.sendNotificationToLocation(location);
-        Mockito.verify(person, Mockito.never().receive(weatherNotification));
+        Location locationTwo = Mockito.mock(Location.class);
+        weatherAlertService.sendNotificationToLocation(weatherNotification, locationTwo);
+        Mockito.verify(person, Mockito.never()).receive(weatherNotification);
     }
 
     @Test
     public void shouldSendNotificationToAllWithRelevantMethod() {
         Person personTwo = Mockito.mock(Person.class);
         Location locationTwo = Mockito.mock(Location.class);
-        weatherAlertService.addSubscriber(person, location);
+        Person personThree = Mockito.mock(Person.class);
+        Location locationThree = Mockito.mock(Location.class);
         weatherAlertService.addSubscriber(personTwo, locationTwo);
-        weatherAlertService.sendNotificationToAll();
-        Mockito.verify(person, Mockito.times(1).receive(weatherNotification));
-        Mockito.verify(personTwo, Mockito.times(1).receive(weatherNotification));
+        weatherAlertService.addSubscriber(person, location);
+        weatherAlertService.addSubscriber(personThree, locationThree);
+        weatherAlertService.sendNotificationToAll(weatherNotification);
+        Mockito.verify(personTwo, Mockito.times(1)).receive(weatherNotification);
+        Mockito.verify(person, Mockito.times(1)).receive(weatherNotification);
+        Mockito.verify(personThree, Mockito.times(1)).receive(weatherNotification);
     }
-
 
 }

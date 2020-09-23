@@ -8,7 +8,7 @@ import java.util.Map;
 public class WeatherAlertService {
 
     private Map<Location, List<Person>> allTheLocations = new HashMap<>();
-    private WeatherNotification weatherNotification;
+
 
     public Map<Location, List<Person>> addLocation(Location location) {
         System.out.println("Adding location.");
@@ -23,7 +23,7 @@ public class WeatherAlertService {
 
     public void addSubscriber(Person person, Location location) {
         if (!allTheLocations.containsKey(location)) {
-            System.out.println("Location not found. Adding location.");
+            System.out.println("Location not found. Adding location to the system.");
             this.addLocation(location);
         } else {
             System.out.println("Location found.");
@@ -35,7 +35,7 @@ public class WeatherAlertService {
         }
     }
 
-    public void sendNotificationToLocation(Location location) {
+    public void sendNotificationToLocation(WeatherNotification weatherNotification, Location location) {
         for (Map.Entry<Location, List<Person>> entry : this.allTheLocations.entrySet()) {
             if(entry.getKey().equals(location)) {
                 entry.getValue().forEach(person -> person.receive(weatherNotification));
@@ -43,7 +43,7 @@ public class WeatherAlertService {
         }
     }
 
-    public void sendNotificationToAll() {
+    public void sendNotificationToAll(WeatherNotification weatherNotification) {
         for (Map.Entry<Location, List<Person>> entry : this.allTheLocations.entrySet()) {
             entry.getValue().forEach(person -> person.receive(weatherNotification));
         }
