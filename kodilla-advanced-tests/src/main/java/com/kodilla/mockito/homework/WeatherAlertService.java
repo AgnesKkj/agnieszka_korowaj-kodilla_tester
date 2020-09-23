@@ -1,7 +1,5 @@
 package com.kodilla.mockito.homework;
 
-import com.kodilla.notification.Notification;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,7 +8,7 @@ import java.util.Map;
 public class WeatherAlertService {
 
     private Map<Location, List<Person>> allTheLocations = new HashMap<>();
-    private Notification notification;
+    private WeatherNotification weatherNotification;
 
     public Map<Location, List<Person>> addLocation(Location location) {
         allTheLocations.put(location, new ArrayList<Person>());
@@ -33,14 +31,14 @@ public class WeatherAlertService {
     public void sendNotificationToLocation(Location location) {
         for (Map.Entry<Location, List<Person>> entry : this.allTheLocations.entrySet()) {
             if(entry.getKey().equals(location)) {
-                entry.getValue().forEach(person -> person.receive(notification));
+                entry.getValue().forEach(person -> person.receive(weatherNotification));
         }
         }
     }
 
     public void sendNotificationToAll() {
         for (Map.Entry<Location, List<Person>> entry : this.allTheLocations.entrySet()) {
-            entry.getValue().forEach(person -> person.receive(notification));
+            entry.getValue().forEach(person -> person.receive(weatherNotification));
         }
     }
 }

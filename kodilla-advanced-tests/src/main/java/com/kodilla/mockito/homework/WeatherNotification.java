@@ -1,5 +1,5 @@
 package com.kodilla.mockito.homework;
 
-public interface Notification {
+public interface WeatherNotification {
 
 }

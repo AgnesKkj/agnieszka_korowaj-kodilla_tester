@@ -9,27 +9,33 @@ public class WeatherAlertServiceTestSuite {
     WeatherAlertService weatherAlertService = new WeatherAlertService();
     Person person = Mockito.mock(Person.class);
     Location location = Mockito.mock(Location.class);
-    Notification notification = Mockito.mock(Notification.class);
+    WeatherNotification weatherNotification = Mockito.mock(WeatherNotification.class);
 
     @Test
     public void notSubscribedPersonShouldNotReceiveNotifications() {
         weatherAlertService.addLocation(location);
         weatherAlertService.sendNotificationToLocation(location);
-        Mockito.verify(person, Mockito.never().receive(notification));
+        Mockito.verify(person, Mockito.never().receive(weatherNotification));
     }
 
     @Test
-    public void subscribedPersonShouldReceiveNotificationIfLocationIsPresent() {
+    public void shouldAddSubscriberIfLocationIsPresent() {
         weatherAlertService.addLocation(location);
         weatherAlertService.addSubscriber(person, location);
-        weatherAlertService.sendNotificationToLocation(location);
-        Mockito.verify(person, Mockito.never().receive(notification));
+        Mockito.verify(location, Mockito.times(1).receiveSubscriber(person));
     }
 
     @Test
-    public void shouldAddSubscriberIfLocationWasNotPresent() {
+    public void shouldAddSubscriberWithLocationIfLocationWasNotPresent() {
         weatherAlertService.addSubscriber(person, location);
         Mockito.verify(location, Mockito.times(1).receiveSubscriber(person));
+    }
+
+    @Test
+    public void subscribedPersonShouldReceiveNotification() {
+        weatherAlertService.addSubscriber(person, location);
+        weatherAlertService.sendNotificationToLocation(location);
+        Mockito.verify(person, Mockito.never().receive(weatherNotification));
     }
 
     @Test
@@ -39,8 +45,8 @@ public class WeatherAlertServiceTestSuite {
         weatherAlertService.addSubscriber(person, location);
         weatherAlertService.addSubscriber(personTwo, locationTwo);
         weatherAlertService.sendNotificationToAll();
-        Mockito.verify(person, Mockito.times(1).receive(notification));
-        Mockito.verify(personTwo, Mockito.times(1).receive(notification));
+        Mockito.verify(person, Mockito.times(1).receive(weatherNotification));
+        Mockito.verify(personTwo, Mockito.times(1).receive(weatherNotification));
     }
 
 

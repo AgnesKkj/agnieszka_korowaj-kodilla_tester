@@ -1,4 +1,4 @@
-package com.kodilla.mockito;
+package com.kodilla.notification;
 
 public interface MobilePhone {
 
