@@ -6,6 +6,7 @@ public class SimpleApplication {
     private MessageService messageService;
 
     public SimpleApplication(MessageService messageService) {
+
         this.messageService = messageService;
     }
 
@@ -16,6 +17,7 @@ public class SimpleApplication {
     }
 
     private boolean checkReceiver(String receiver) {
+
         return receiver != null && !receiver.isEmpty();
     }
 }
