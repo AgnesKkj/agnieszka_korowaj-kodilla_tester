@@ -1,4 +1,4 @@
-package com.kodilla.spring.basic.spring_dependency_injection.homework;
+package com.kodilla.spring.basic.spring_dependency_injection.homework.calculator.calculator;
 
 import org.springframework.stereotype.Component;
 

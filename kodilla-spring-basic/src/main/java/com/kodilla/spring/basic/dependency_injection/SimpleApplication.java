@@ -6,7 +6,6 @@ public class SimpleApplication {
     private MessageService messageService;
 
     public SimpleApplication(MessageService messageService) {
-
         this.messageService = messageService;
     }
 

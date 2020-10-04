@@ -1,5 +1,7 @@
-package com.kodilla.spring.basic.spring_dependency_injection.homework;
+package com.kodilla.spring.basic.spring_dependency_injection.homework.calculator;
 
+import com.kodilla.spring.basic.spring_dependency_injection.homework.calculator.calculator.Calculator;
+import com.kodilla.spring.basic.spring_dependency_injection.homework.calculator.calculator.DivideByZero;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
