@@ -1,16 +1,22 @@
 package com.kodilla.spring.basic.spring_configuration.homework;
 
+import java.util.Random;
+
 public class SUV implements Car {
 
-    boolean hasHeadlightsTurnedOn = false;
+    private boolean hasHeadlightsTurnedOn;
 
     @Override
     public boolean hasHeadlightsOn() {
         return hasHeadlightsTurnedOn;
     }
 
-    public void turnLightsOn() {
-        this.hasHeadlightsTurnedOn = true;
+    @Override
+    public void turnLights(int hour) {
+        if(hour < 6 && hour >= 20) {
+            this.hasHeadlightsTurnedOn = true;
+        }
+        this.hasHeadlightsTurnedOn = false;
     }
 
     @Override

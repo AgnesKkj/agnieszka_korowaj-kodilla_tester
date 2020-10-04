@@ -1,6 +1,7 @@
 package com.kodilla.spring.basic.spring_configuration.homework;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 
 import java.util.Random;
@@ -9,11 +10,27 @@ import java.util.Random;
 @Configuration
 public class CarSettings {
 
-    private int seasonNumber;
     private String seasonName;
     private Car car;
 
     @Bean
+    public SUV createSUV() {
+        return new SUV();
+    }
+
+    @Bean
+    public Sedan createSedan() {
+        return new Sedan();
+    }
+
+    @Bean
+    public Cabrio createCabrio() {
+        return new Cabrio();
+    }
+
+
+    @Bean
+    @Primary
     public Car carPicker() {
         Random generator = new Random();
         int seasonNumber = generator.nextInt(5);
@@ -43,16 +60,6 @@ public class CarSettings {
         }
         return car;
     }
-
-    public void turnLightsDependingOnHour() {
-        Random generatorHour = new Random();
-        int hour = generatorHour.nextInt(24);
-        if(hour < 6 && hour >= 20) {
-            car.turnLightsOn();
-        }
-        System.out.println(car.hasHeadlightsOn());
-    }
-
 
 }
 
