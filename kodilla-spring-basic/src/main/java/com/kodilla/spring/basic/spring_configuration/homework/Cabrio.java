@@ -2,7 +2,7 @@ package com.kodilla.spring.basic.spring_configuration.homework;
 
 import java.util.Random;
 
-public class Cabrio implements Car{
+public class Cabrio implements Car {
 
     boolean hasHeadlightsTurnedOn = false;
 
@@ -11,6 +11,7 @@ public class Cabrio implements Car{
         return hasHeadlightsTurnedOn;
     }
 
+    @Override
     public void turnLights(String onOff) {
         if(onOff == "off") {
             hasHeadlightsTurnedOn = false;
@@ -34,6 +35,7 @@ public class Cabrio implements Car{
             hasHeadlightsTurnedOn = false;
         }
         System.out.println("Hour: " + hour);
+        System.out.println("Headlights depending on hour: " + this.hasHeadlightsOn());
         return this.hasHeadlightsTurnedOn;
     }
 

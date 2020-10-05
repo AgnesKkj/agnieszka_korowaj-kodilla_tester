@@ -1,8 +1,5 @@
 package com.kodilla.spring.basic.spring_configuration.homework;
 
-
-import java.util.Random;
-
 public class SUV implements Car {
 
     private boolean hasHeadlightsTurnedOn;
@@ -27,15 +24,6 @@ public class SUV implements Car {
 
     @Override
     public boolean turnLightsDependingOnHour() {
-        Random generator = new Random();
-        int hour = generator.nextInt(24);
-        if(hour < 6 || hour >= 20) {
-            hasHeadlightsTurnedOn = true;
-        }
-        else {
-            hasHeadlightsTurnedOn = false;
-        }
-        System.out.println("Hour: " + hour);
         return this.hasHeadlightsTurnedOn;
     }
 

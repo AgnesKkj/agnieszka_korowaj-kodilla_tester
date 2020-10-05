@@ -11,6 +11,7 @@ public class Sedan implements Car {
         return hasHeadlightsTurnedOn;
     }
 
+    @Override
     public void turnLights(String onOff) {
         if(onOff == "off") {
             this.hasHeadlightsTurnedOn = false;

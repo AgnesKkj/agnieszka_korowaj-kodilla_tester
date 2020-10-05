@@ -1,7 +1,6 @@
-/*
+
 package com.kodilla.spring.basic.spring_configuration.homework;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
@@ -32,18 +31,32 @@ public class CarSettingsTestSuite {
     }
 
     @Test
-    public void shouldCreateRandomCar() {
+    public void shouldCreateCarBeanByRandomSeason() {
         Car car = (Car) context.getBean("carPicker");
         String type = car.getCarType();
+        System.out.println(type);
         List<String> possibleTypes = Arrays.asList("SUV", "Sedan", "Cabrio");
-        Assertions.assertTrue(possibleTypes.contains(type));
+        assertTrue(possibleTypes.contains(type));
     }
 
     @Test
-    public void shouldTurnLightsOn() {
+    public void shouldTurnHeadlightsOnDependingOnHour() {
         Car car = (Car) context.getBean("carPicker");
-        int hour = 19;
-        boolean hasHeadLightsTurnedOn = car.hasHeadlightsOn();
+        boolean headlightsOn = car.hasHeadlightsOn();
+        System.out.println(headlightsOn);
+        //chcę albo prawdę, albo fałsz, nie coś trzeciego
+        List<Boolean> headlightsOnOff = Arrays.asList(true, false);
+        assertTrue(headlightsOnOff.contains(headlightsOn));
     }
 
-}*/
+    @Test
+    public void shouldTurnHeadlightsOnIndependentlyInWinter() {
+        Car car = (Car) context.getBean("carPicker");
+        boolean headlightsOn = car.hasHeadlightsOn();
+        String type = car.getCarType();
+        if(type == "SUV") {
+            assertEquals(true,headlightsOn);
+        }
+    }
+
+}

@@ -2,20 +2,14 @@ package com.kodilla.spring.basic.spring_configuration.homework;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-
-
 import java.util.Random;
-
 import static com.kodilla.spring.basic.spring_configuration.homework.CarSettings.Seasons.*;
 
 
 @Configuration
 public class CarSettings {
 
-    private String seasonName;
-    private Car car;
-
-    public enum Seasons {
+    enum Seasons {
         SPRING,
         SUMMER,
         FALL,
@@ -23,6 +17,7 @@ public class CarSettings {
     }
 
     private Seasons season;
+    Car car;
 
     @Bean
     public SUV createSUV() {
@@ -39,31 +34,34 @@ public class CarSettings {
         return new Cabrio();
     }
 
-
     @Bean
     @Primary
-    public Car carPicker(Seasons season) {
-        Random generator = new Random();
-        int seasonNumber = generator.nextInt(5);
-        switch(season) {
-            case SPRING:
+    public Car carPicker() {
+        Random random = new Random();
+        int seasonNumber = random.nextInt(4);
+        switch(seasonNumber) {
+            case 0:
+                season = SPRING;
                 car = new Sedan();
-                System.out.println("It's " + SPRING + " and we drive a " + car.getCarType());
+                System.out.println("It's " + season + " and we drive a " + car.getCarType());
                 car.turnLightsDependingOnHour();
                 break;
-            case SUMMER:
+            case 1:
+                season = SUMMER;
                 car = new Cabrio();
-                System.out.println("It's " + SUMMER + " and we drive a " + car.getCarType());
+                System.out.println("It's " + season + " and we drive a " + car.getCarType());
                 car.turnLightsDependingOnHour();
                 break;
-            case FALL:
+            case 2:
+                season = FALL;
                 car = new Sedan();
-                System.out.println("It's " + FALL + " and we drive a " + car.getCarType());
+                System.out.println("It's " + season + " and we drive a " + car.getCarType());
                 car.turnLightsDependingOnHour();
                 break;
-            case WINTER:
+            case 3:
+                season = WINTER;
                 car = new SUV();
-                System.out.println("It's " + WINTER + " and we drive a " + car.getCarType());
+                System.out.println("It's " + season + " and we drive a " + car.getCarType());
                 car.turnLights("on");
                 System.out.println("Headlights all day long: " + car.hasHeadlightsOn());
                 break;
@@ -72,7 +70,6 @@ public class CarSettings {
         }
         return car;
     }
-
 }
 
 
