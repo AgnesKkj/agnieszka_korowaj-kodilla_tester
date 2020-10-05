@@ -1,3 +1,4 @@
+/*
 package com.kodilla.spring.basic.spring_configuration.homework;
 
 import org.junit.jupiter.api.Assertions;
@@ -43,7 +44,6 @@ public class CarSettingsTestSuite {
         Car car = (Car) context.getBean("carPicker");
         int hour = 19;
         boolean hasHeadLightsTurnedOn = car.hasHeadlightsOn();
-        assertFalse(car.);
     }
 
-}
+}*/
