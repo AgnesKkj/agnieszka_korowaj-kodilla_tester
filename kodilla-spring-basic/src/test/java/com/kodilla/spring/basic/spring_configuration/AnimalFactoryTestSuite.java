@@ -32,6 +32,7 @@ public class AnimalFactoryTestSuite {
         Assertions.assertEquals("Bark bark", voice);
     }
 
+
     @Test
     public void shouldCreateRandomAnimal() {
         //Given

@@ -58,5 +58,4 @@ public class CarSettingsTestSuite {
             assertEquals(true,headlightsOn);
         }
     }
-
 }
