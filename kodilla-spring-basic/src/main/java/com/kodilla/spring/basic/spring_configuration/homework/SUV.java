@@ -24,7 +24,7 @@ public class SUV implements Car {
 
     @Override
     public boolean turnLightsDependingOnHour() {
-        return this.hasHeadlightsTurnedOn;
+        return this.hasHeadlightsOn();
     }
 
     @Override

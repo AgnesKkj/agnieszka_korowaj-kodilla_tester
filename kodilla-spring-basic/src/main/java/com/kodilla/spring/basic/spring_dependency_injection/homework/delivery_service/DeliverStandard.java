@@ -1,11 +1,11 @@
 package com.kodilla.spring.basic.spring_dependency_injection.homework.delivery_service;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 @Component
 @Primary
 public class DeliverStandard implements DeliveryService {
-
 
     @Override
     public boolean deliverPackage(String address, double weight) {

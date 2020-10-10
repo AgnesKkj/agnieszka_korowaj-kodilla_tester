@@ -28,15 +28,15 @@ public class Cabrio implements Car {
     public boolean turnLightsDependingOnHour() {
         Random generator = new Random();
         int hour = generator.nextInt(24);
+        System.out.println("Hour: " + hour);
         if(hour < 6 || hour >= 20) {
             hasHeadlightsTurnedOn = true;
         }
         else {
             hasHeadlightsTurnedOn = false;
         }
-        System.out.println("Hour: " + hour);
         System.out.println("Headlights depending on hour: " + this.hasHeadlightsOn());
-        return this.hasHeadlightsTurnedOn;
+        return this.hasHeadlightsOn();
     }
 
     @Override
