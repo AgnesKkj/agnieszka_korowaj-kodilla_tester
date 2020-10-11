@@ -36,4 +36,10 @@ public class BookDto {
     public int hashCode() {
         return Objects.hash(getTitle(), getAuthor());
     }
+
+    @Override
+    public String toString() {
+        return "BookDto: " +
+                title + ", " + author;
+    }
 }
