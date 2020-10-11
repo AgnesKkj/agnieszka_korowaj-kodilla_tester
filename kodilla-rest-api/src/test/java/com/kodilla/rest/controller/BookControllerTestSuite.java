@@ -34,15 +34,15 @@ class BookControllerTestSuite {
     @Test
     public void shouldAddBooksUsingAddBookMethodFromController() {
         //given
-        Mockito.when(bookController.getBooks()).thenReturn(booksList);
         Mockito.when(bookServiceMock.getBooks()).thenReturn(booksList);
         booksList.add(new BookDto("title 1", "author 1"));
         booksList.add(new BookDto("title 2", "author 2"));
+
+        //when
         bookController.addBook(new BookDto("title 1", "author 1"));
         bookController.addBook(new BookDto("title 2", "author 2"));
-        //when
-        List<BookDto> result = bookController.getBooks();
         System.out.println(bookController.getBooks());
+
         //then
         Mockito.verify(bookServiceMock).addBook(new BookDto("title 1", "author 1"));
         Mockito.verify(bookServiceMock).addBook(new BookDto("title 2", "author 2"));
@@ -51,15 +51,15 @@ class BookControllerTestSuite {
     @Test
     public void shouldIncreaseListSizeWHenUsingAddBookMethodFromController() {
         //given
-        Mockito.when(bookController.getBooks()).thenReturn(booksList);
         Mockito.when(bookServiceMock.getBooks()).thenReturn(booksList);
         booksList.add(new BookDto("title 1", "author 1"));
         booksList.add(new BookDto("title 2", "author 2"));
+
+        //when
         bookController.addBook(new BookDto("title 1", "author 1"));
         bookController.addBook(new BookDto("title 2", "author 2"));
-        //when
-        List<BookDto> result = bookController.getBooks();
         System.out.println(bookController.getBooks());
+        List<BookDto> result = bookController.getBooks();
         //then
         assertThat(result).hasSize(2);
     }
