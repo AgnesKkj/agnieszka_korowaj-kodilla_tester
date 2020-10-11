@@ -28,8 +28,8 @@ public class BookDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BookDto bookDto = (BookDto) o;
-        return Objects.equals(getTitle(), bookDto.getTitle()) &&
-                Objects.equals(getAuthor(), bookDto.getAuthor());
+        return getTitle().equals(bookDto.getTitle()) &&
+                getAuthor().equals(bookDto.getAuthor());
     }
 
     @Override
