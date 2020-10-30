@@ -6,8 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public
-class BookService {
+public class BookService {
 
     private List<BookDto> books = new ArrayList<>();
 
