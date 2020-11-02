@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.GoogleResults;
 import pages.GoogleSearch;
 import pages.SearchResultToClick;
 
@@ -32,7 +33,22 @@ public class TestGoogle {
     public void testGooglePage() {
         GoogleSearch googleSearch = new GoogleSearch(driver);
         googleSearch.searchResults();
+    }
 
+    @Test
+    public void createResultToClick() {
+        //given
+        GoogleSearch googleSearch = new GoogleSearch(driver);
+        googleSearch.searchResults();
+        GoogleResults googleResults = new GoogleResults(driver);
+        googleResults.getResults();
+        SearchResultToClick searchResultToClick = new SearchResultToClick(driver);
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        //when
+        WebElement expectedResult = searchResultToClick.createResultToClick(3);
+        //then
+        WebElement resultToClick = searchResultToClick.createResultToClick(3);
+        assertEquals(expectedResult.getText(), resultToClick.getText());
     }
 
     @Test
@@ -42,7 +58,7 @@ public class TestGoogle {
         googleSearch.searchResults();
         SearchResultToClick searchResultToClick = new SearchResultToClick(driver);
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        //when
+       //when
         WebElement expectedResult = searchResultToClick.createResultToClick(3);
         wait.until(ExpectedConditions.elementToBeClickable(expectedResult)).click();
         //then
