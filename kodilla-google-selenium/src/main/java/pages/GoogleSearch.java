@@ -3,11 +3,11 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.util.List;
 
 public class GoogleSearch extends AbstractPage {
@@ -23,10 +23,7 @@ public class GoogleSearch extends AbstractPage {
         super(driver);
     }
 
-    public static void main(String[] args) {
-        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
-        driver.navigate().to("https://www.google.com");
+    public void searchResults() {
         PageFactory.initElements(driver,GoogleSearch.class);
 
         //wiersze zamykające popup
@@ -34,11 +31,10 @@ public class GoogleSearch extends AbstractPage {
         WebElement consentButton = driver.findElement(By.cssSelector("#introAgreeButton"));
         WebDriverWait wait = new WebDriverWait(driver,20);
         wait.until(ExpectedConditions.elementToBeClickable(consentButton)).click();
+
         inputField.sendKeys("Kodilla");
-        //wait.until(ExpectedConditions.elementToBeClickable(searchButton.get(0))).click();
         googleResults = loadResults(driver);
         googleResults.iSeeResults();
-        driver.close();
 
     }
 
