@@ -35,16 +35,6 @@ public class TestGoogle {
     }
 
     @Test
-    public void clickByChosenIndex() {
-        //given
-        GoogleSearch googleSearch = new GoogleSearch(driver);
-        googleSearch.searchResults();
-        ChosenResult chosenResult = new ChosenResult(driver);
-        WebDriverWait wait = new WebDriverWait(driver,10);
-        wait.until(ExpectedConditions.visibilityOf(chosenResult.getChosenSiteWebElement(3))).click();
-    }
-
-    @Test
     public void clickedElementIsTheExpectedOne() {
         //given
         GoogleSearch googleSearch = new GoogleSearch(driver);
