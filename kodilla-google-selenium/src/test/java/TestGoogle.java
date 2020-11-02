@@ -1,17 +1,16 @@
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pages.GoogleResults;
+import pages.ChosenResult;
 import pages.GoogleSearch;
-import pages.SearchResultToClick;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
 public class TestGoogle {
 
@@ -36,51 +35,30 @@ public class TestGoogle {
     }
 
     @Test
-    public void createResultToClick() {
+    public void clickByChosenIndex() {
         //given
         GoogleSearch googleSearch = new GoogleSearch(driver);
         googleSearch.searchResults();
-        GoogleResults googleResults = new GoogleResults(driver);
-        googleResults.getResults();
-        SearchResultToClick searchResultToClick = new SearchResultToClick(driver);
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        //when
-        WebElement expectedResult = searchResultToClick.createResultToClick(3);
-        //then
-        WebElement resultToClick = searchResultToClick.createResultToClick(3);
-        assertEquals(expectedResult.getText(), resultToClick.getText());
+        ChosenResult chosenResult = new ChosenResult(driver);
+        WebDriverWait wait = new WebDriverWait(driver,10);
+        wait.until(ExpectedConditions.visibilityOf(chosenResult.getChosenSiteWebElement(3))).click();
     }
 
     @Test
-    public void clickedResultIsThePickedOne() {
+    public void clickedElementIsTheExpectedOne() {
         //given
         GoogleSearch googleSearch = new GoogleSearch(driver);
         googleSearch.searchResults();
-        SearchResultToClick searchResultToClick = new SearchResultToClick(driver);
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-       //when
-        WebElement expectedResult = searchResultToClick.createResultToClick(3);
-        wait.until(ExpectedConditions.elementToBeClickable(expectedResult)).click();
+        ChosenResult chosenResult = new ChosenResult(driver);
+        //when
+        WebElement expectedClickable = driver.findElement(By.cssSelector("#rso > div:nth-child(13) > div > div.yuRUbf > a"));
+        WebDriverWait wait = new WebDriverWait(driver,10);
+        wait.until(ExpectedConditions.elementToBeClickable(expectedClickable));
+        wait.until(ExpectedConditions.elementToBeClickable(chosenResult.getChosenSiteWebElement(3))).click();
         //then
-        WebElement resultToClick = searchResultToClick.createResultToClick(3);
-        wait.until(ExpectedConditions.elementToBeClickable(resultToClick)).click();
-        assertEquals(expectedResult.getText(), resultToClick.getText());
+        assertEquals(expectedClickable.getText(), chosenResult.getChosenSiteWebElement(3).getText());
     }
 
-    @Test
-    public void clickedResultIsNotOneNotPicked() {
-        //given
-        GoogleSearch googleSearch = new GoogleSearch(driver);
-        googleSearch.searchResults();
-        SearchResultToClick searchResultToClick = new SearchResultToClick(driver);
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        //when
-        WebElement expectedResult = searchResultToClick.createResultToClick(4);
-        wait.until(ExpectedConditions.elementToBeClickable(expectedResult)).click();
-        //then
-        WebElement resultToClick = searchResultToClick.createResultToClick(2);
-        wait.until(ExpectedConditions.elementToBeClickable(resultToClick)).click();
-        assertNotEquals(expectedResult.getText(), resultToClick.getText());
-    }
+
 
 }
