@@ -10,7 +10,7 @@ import java.util.List;
 public class GoogleResults extends AbstractPage {
 
     @FindBy(css = "div[class='g']")
-    private List<WebElement> results;
+   List<WebElement> results;
 
     public GoogleResults(WebDriver driver) {
         super(driver);
@@ -21,4 +21,6 @@ public class GoogleResults extends AbstractPage {
         System.out.println("I see results.");
         System.out.println("Number of results: " + results.size());
     }
+
+
 }
