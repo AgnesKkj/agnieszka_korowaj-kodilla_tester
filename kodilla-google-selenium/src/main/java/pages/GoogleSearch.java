@@ -8,10 +8,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.util.List;
 
-public class GoogleSearch {
+public class GoogleSearch extends AbstractPage {
 
     @FindBy(css = "input[title='Search']")
     static WebElement inputField;
@@ -20,18 +19,21 @@ public class GoogleSearch {
     static List<WebElement> searchButton;
     private static GoogleResults googleResults;
 
+    public GoogleSearch(WebDriver driver) {
+        super(driver);
+    }
+
     public static void main(String[] args) {
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
         WebDriver driver = new ChromeDriver();
-        WebDriverWait wait = new WebDriverWait(driver,20);
         driver.navigate().to("https://www.google.com");
         PageFactory.initElements(driver,GoogleSearch.class);
 
         //wiersze zamykające popup
         driver.switchTo().frame(0);
         WebElement consentButton = driver.findElement(By.cssSelector("#introAgreeButton"));
+        WebDriverWait wait = new WebDriverWait(driver,20);
         wait.until(ExpectedConditions.elementToBeClickable(consentButton)).click();
-
         inputField.sendKeys("Kodilla");
         //wait.until(ExpectedConditions.elementToBeClickable(searchButton.get(0))).click();
         googleResults = loadResults(driver);
@@ -43,7 +45,7 @@ public class GoogleSearch {
     public static GoogleResults loadResults(WebDriver driver) {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         wait.until(ExpectedConditions.elementToBeClickable(searchButton.get(0))).click();
-        GoogleResults googleResults = new GoogleResults();
+        GoogleResults googleResults = new GoogleResults(driver);
         return googleResults;
     }
 }
