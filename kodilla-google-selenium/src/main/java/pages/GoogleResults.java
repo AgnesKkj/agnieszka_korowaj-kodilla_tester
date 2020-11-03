@@ -10,14 +10,14 @@ import java.util.List;
 public class GoogleResults extends AbstractPage {
 
     @FindBy(css = "div[class='g']")
-    private List<WebElement> results;
+    private static List<WebElement> results;
 
     public GoogleResults(WebDriver driver) {
         super(driver);
         PageFactory.initElements(this.driver,this);
     }
 
-    public List<WebElement> getResults() {
+    public static List<WebElement> getResults() {
         return results;
     }
 
