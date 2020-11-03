@@ -44,8 +44,8 @@ public class TestGoogle {
         ChosenResult chosenResult = new ChosenResult(driver);
         //when
         WebElement expectedClickable = driver.findElement(By.xpath("//*[@id=\"rso\"]/div[5]/div/div[1]/a"));
-        wait.until(ExpectedConditions.elementToBeClickable(expectedClickable));
-        wait.until(ExpectedConditions.elementToBeClickable(chosenResult.getChosenSiteWebElement(3)));
+        wait.until(ExpectedConditions.visibilityOf(expectedClickable));
+        wait.until(ExpectedConditions.visibilityOf(chosenResult.getChosenSiteWebElement(3)));
         System.out.println(expectedClickable.getAttribute("class"));
         System.out.println(chosenResult.getChosenSiteWebElement(3).getAttribute("class"));
         chosenResult.getChosenSiteWebElement(3).click();
