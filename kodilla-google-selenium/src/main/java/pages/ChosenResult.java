@@ -20,7 +20,7 @@ public class ChosenResult extends AbstractPage {
     }
 
     public WebElement getChosenSiteWebElement(int index) {
-        WebElement chosenResultSite = resultsToClick.get(index).findElement(By.tagName("a"));
+        WebElement chosenResultSite = resultsToClick.get(index).findElement(By.xpath("//div/div[1]/a"));
         return chosenResultSite;
     }
 

@@ -39,16 +39,19 @@ public class TestGoogle {
         //given
         GoogleSearch googleSearch = new GoogleSearch(driver);
         googleSearch.searchResults();
+        WebDriverWait wait = new WebDriverWait(driver,10);
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//*[@class='g']")));
         ChosenResult chosenResult = new ChosenResult(driver);
         //when
-        WebElement expectedClickable = driver.findElement(By.cssSelector("#rso > div:nth-child(13) > div > div.yuRUbf > a"));
-        WebDriverWait wait = new WebDriverWait(driver,10);
+        WebElement expectedClickable = driver.findElement(By.xpath("//*[@id=\"rso\"]/div[5]/div/div[1]/a"));
         wait.until(ExpectedConditions.elementToBeClickable(expectedClickable));
-        wait.until(ExpectedConditions.elementToBeClickable(chosenResult.getChosenSiteWebElement(3))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(chosenResult.getChosenSiteWebElement(3)));
+        System.out.println(expectedClickable.getAttribute("class"));
+        System.out.println(chosenResult.getChosenSiteWebElement(3).getAttribute("class"));
+        chosenResult.getChosenSiteWebElement(3).click();
         //then
-        assertEquals(expectedClickable.getText(), chosenResult.getChosenSiteWebElement(3).getText());
+        assertEquals(expectedClickable.getAttribute("class"), chosenResult.getChosenSiteWebElement(3).getAttribute("class"));
     }
-
 
 
 }
