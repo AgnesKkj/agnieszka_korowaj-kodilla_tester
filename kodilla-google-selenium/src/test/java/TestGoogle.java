@@ -11,6 +11,7 @@ import pages.ChosenResult;
 import pages.GoogleSearch;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class TestGoogle {
 
@@ -43,13 +44,29 @@ public class TestGoogle {
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//*[@class='g']")));
         ChosenResult chosenResult = new ChosenResult(driver);
         //when
-        WebElement expectedClickable = driver.findElement(By.xpath("//*[@id=\"rso\"]/div[5]"));
+        WebElement expectedClickable = driver.findElement(By.xpath("//*[@class='g'][4]"));
         wait.until(ExpectedConditions.visibilityOf(expectedClickable));
         wait.until(ExpectedConditions.visibilityOf(chosenResult.getChosenSiteWebElement(3)));
-
-        chosenResult.getChosenSiteWebElement(3).click();
         //then
-        assertEquals(expectedClickable, chosenResult.getChosenSiteWebElement(3));
+        chosenResult.getChosenSiteWebElement(3).click();
+        assertEquals(expectedClickable.getText(), chosenResult.getChosenSiteWebElement(3).getText());
+    }
+
+    @Test
+    public void clickedElementIsNotUnexpectedOne() {
+        //given
+        GoogleSearch googleSearch = new GoogleSearch(driver);
+        googleSearch.searchResults();
+        WebDriverWait wait = new WebDriverWait(driver,10);
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//*[@class='g']")));
+        ChosenResult chosenResult = new ChosenResult(driver);
+        //when
+        WebElement expectedClickable = driver.findElement(By.xpath("//*[@class='g'][6]"));
+        wait.until(ExpectedConditions.visibilityOf(expectedClickable));
+        wait.until(ExpectedConditions.visibilityOf(chosenResult.getChosenSiteWebElement(3)));
+        //then
+        chosenResult.getChosenSiteWebElement(3).click();
+        assertNotEquals(expectedClickable.getText(), chosenResult.getChosenSiteWebElement(3).getText());
     }
 
 
