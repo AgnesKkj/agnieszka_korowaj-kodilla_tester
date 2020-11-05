@@ -10,8 +10,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.ChosenResult;
 import pages.GoogleSearch;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 public class TestGoogle {
 
@@ -36,37 +38,115 @@ public class TestGoogle {
     }
 
     @Test
-    public void clickedElementIsTheExpectedOne() {
+    public void chooseElementToBeClickedByIndex() {
         //given
         GoogleSearch googleSearch = new GoogleSearch(driver);
-        googleSearch.searchResults();
-        WebDriverWait wait = new WebDriverWait(driver,10);
-        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//*[@class='g']")));
         ChosenResult chosenResult = new ChosenResult(driver);
+        WebDriverWait wait = new WebDriverWait(driver,10);
+
+        googleSearch.searchResults();
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//*[@class='g']")));
+        chosenResult.storeResultsToClick();
+
         //when
-        WebElement expectedClickable = driver.findElement(By.xpath("//*[@class='g'][4]"));
+        //chcę wywołać 5. wynik wyszukiwania - to się zmienia dość szybko, strony poniżej strony głównej Kodilli
+        // potrafią "wymieniać się" miejscami przy kolejnych próbach uruchomienia testu przez pozycjonowanie SEO
+
+        WebElement expectedClickable = driver.findElement(By.xpath("//*[@class='g'][5]/div/div[1]/a/h3/span"));
+        System.out.println("Expected: " + expectedClickable.getText());
+
+        List<String> allowedResults = new ArrayList<>();
+        allowedResults.add("Czy warto iść na kurs programowania Kodilla? - Girl Into The ...");
+        allowedResults.add("Kodilla - opinie, informacje, kursy | Bootcampy.pl");
+        allowedResults.add("Dlaczego wybrałam Bootcamp Kodilla | BedeProgramistka.pl");
+        allowedResults.add("Kodilla - Home | Facebook");
+        allowedResults.add("Kodilla - znaleziska i wpisy o #kodilla w Wykop.pl");
+
         wait.until(ExpectedConditions.visibilityOf(expectedClickable));
-        wait.until(ExpectedConditions.visibilityOf(chosenResult.getChosenSiteWebElement(3)));
+        chosenResult.getChosenWebsiteElement(4);
+
+        String chosenElementHeadline = chosenResult.getChosenWebsiteElement(4).findElement(By.tagName("span")).getText();
+        System.out.println(chosenElementHeadline);
+
         //then
-        chosenResult.getChosenSiteWebElement(3).click();
-        assertEquals(expectedClickable.getText(), chosenResult.getChosenSiteWebElement(3).getText());
+        assertTrue(allowedResults.contains(chosenElementHeadline));
     }
 
     @Test
-    public void clickedElementIsNotUnexpectedOne() {
+    public void elementChosenToBeClickedIsNotUnexpectedOne() {
         //given
         GoogleSearch googleSearch = new GoogleSearch(driver);
-        googleSearch.searchResults();
-        WebDriverWait wait = new WebDriverWait(driver,10);
-        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//*[@class='g']")));
         ChosenResult chosenResult = new ChosenResult(driver);
+        WebDriverWait wait = new WebDriverWait(driver,10);
+
+        googleSearch.searchResults();
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//*[@class='g']")));
+        chosenResult.storeResultsToClick();
+
         //when
-        WebElement expectedClickable = driver.findElement(By.xpath("//*[@class='g'][6]"));
-        wait.until(ExpectedConditions.visibilityOf(expectedClickable));
-        wait.until(ExpectedConditions.visibilityOf(chosenResult.getChosenSiteWebElement(3)));
+        //wybieram na wynik false stronę główną Kodilli (wynik 1.)
+        WebElement expectedToBeFalse = driver.findElement(By.xpath("//*[@id=\"rso\"]/div[1]/div/div/div/div[1]/a/h3/span"));
+        String expectedToBeFalseTitle = expectedToBeFalse.getText();
+        System.out.println("Expected to assert false: " + expectedToBeFalseTitle);
+        chosenResult.getChosenWebsiteElement(4);
+
+        String chosenElementHeadline = chosenResult.getChosenWebsiteElement(4).findElement(By.tagName("span")).getText();
+        System.out.println("Chosen by method: " + chosenElementHeadline);
+
         //then
-        chosenResult.getChosenSiteWebElement(3).click();
-        assertNotEquals(expectedClickable.getText(), chosenResult.getChosenSiteWebElement(3).getText());
+        assertNotEquals(expectedToBeFalseTitle,chosenElementHeadline);
+    }
+
+    @Test
+    public void clickedElementIsOneChosenToBeClicked() {
+        //given
+        GoogleSearch googleSearch = new GoogleSearch(driver);
+        ChosenResult chosenResult = new ChosenResult(driver);
+        WebDriverWait wait = new WebDriverWait(driver,10);
+
+        googleSearch.searchResults();
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//*[@class='g']")));
+        chosenResult.storeResultsToClick();
+
+        //when
+        chosenResult.getChosenWebsiteElement(5);
+        String expectedTitle = chosenResult.getChosenWebsiteElement(5).findElement(By.tagName("span")).getText();
+        chosenResult.clickChosenElement();
+        //czekam na załadowanie nowej strony
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//html/body")));
+        String openedWebsiteTitle = driver.getTitle();
+        System.out.println(openedWebsiteTitle);
+        //then
+        assertEquals(expectedTitle, openedWebsiteTitle);
+    }
+
+    @Test
+    public void clickedElementIsNotOneNotChosenToBeClicked() {
+        //given
+        GoogleSearch googleSearch = new GoogleSearch(driver);
+        ChosenResult chosenResult = new ChosenResult(driver);
+        WebDriverWait wait = new WebDriverWait(driver,10);
+
+        googleSearch.searchResults();
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//*[@class='g']")));
+        chosenResult.storeResultsToClick();
+
+        //when
+        //wybieram na wynik false stronę główną Kodilli (wynik 1.)
+        WebElement expectedToBeFalse = driver.findElement(By.xpath("//*[@id=\"rso\"]/div[1]/div/div/div/div[1]/a/h3/span"));
+        String expectedToBeFalseTitle = expectedToBeFalse.getText();
+        System.out.println("Expected to assert false: " + expectedToBeFalseTitle);
+
+        chosenResult.getChosenWebsiteElement(5);
+        chosenResult.clickChosenElement();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//html/body")));
+        String openedWebsiteTitle = driver.getTitle();
+        System.out.println(openedWebsiteTitle);
+
+        //then
+        assertNotEquals(expectedToBeFalseTitle, openedWebsiteTitle);
+
     }
 
 
