@@ -26,12 +26,12 @@ public class FizzBuzzSteps implements En {
             this.number = 10;
         });
 
-        When("I ask if the number is divisible by 3", () -> {
+        When("I ask if the number <isDivisibleByThree>", () -> {
             FizzBuzzChecker fizzBuzzChecker = new FizzBuzzChecker();
             this.isDivisibleByThree = fizzBuzzChecker.checkIfDivisibleByThree(number);
         });
 
-        And("I ask if the number is divisible by 5",() -> {
+        And("I ask if the number <isDivisibleByFive>",() -> {
             FizzBuzzChecker fizzBuzzChecker = new FizzBuzzChecker();
             this.isDivisibleByFive = fizzBuzzChecker.checkIfDivisibleByThree(number);
         });
