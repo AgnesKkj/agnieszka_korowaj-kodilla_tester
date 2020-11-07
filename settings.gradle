@@ -10,4 +10,6 @@ include 'kodilla-rest-api'
 include 'kodilla-soap'
 include 'kodilla-selenium'
 include 'kodilla-google-selenium'
+include 'kodilla-cucumber'
+include 'kodilla-cucumber'
 
