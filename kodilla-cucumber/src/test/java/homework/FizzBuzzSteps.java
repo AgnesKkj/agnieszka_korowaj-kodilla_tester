@@ -1,5 +1,4 @@
 package homework;
-
 import io.cucumber.java8.En;
 import org.junit.Assert;
 
@@ -10,33 +9,34 @@ public class FizzBuzzSteps implements En {
     private String answer;
 
     public FizzBuzzSteps() {
-        Given("number is ", () -> {
+
+        Given("^number is <number>$", () -> {
             this.number = 6;
         });
 
-        Given("number is ", () -> {
+        Given("^number is <number>$", () -> {
             this.number = 15;
         });
 
-        Given("number is ", () -> {
+        Given("^number is <number>$", () -> {
             this.number = 7;
         });
 
-        Given("number is ", () -> {
+        Given("^number is <number>$", () -> {
             this.number = 10;
         });
 
-        When("I ask if the number <isDivisibleByThree>", () -> {
+        When("^I ask if the number <isDivisibleByThree>$", () -> {
             FizzBuzzChecker fizzBuzzChecker = new FizzBuzzChecker();
             this.isDivisibleByThree = fizzBuzzChecker.checkIfDivisibleByThree(number);
         });
 
-        And("I ask if the number <isDivisibleByFive>",() -> {
+        When("^I ask if the number <isDivisibleByFive>$", () -> {
             FizzBuzzChecker fizzBuzzChecker = new FizzBuzzChecker();
-            this.isDivisibleByFive = fizzBuzzChecker.checkIfDivisibleByThree(number);
+            this.isDivisibleByFive = fizzBuzzChecker.checkIfDivisibleByFive(number);
         });
 
-        When("I compare <isDivisibleByThree> and <isDivisibleByFive>", () -> {
+        When("^I compare <isDivisibleByThree> and <isDivisibleByFive>$", () -> {
             FizzBuzzReturnMessages fizzBuzzReturnMessages = new FizzBuzzReturnMessages();
             this.answer = fizzBuzzReturnMessages.returnFizzBuzzMessage(number);
         });
