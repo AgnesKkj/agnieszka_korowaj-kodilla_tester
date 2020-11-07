@@ -41,7 +41,7 @@ public class FizzBuzzSteps implements En {
             this.answer = fizzBuzzReturnMessages.returnFizzBuzzMessage(number);
         });
 
-        Then("I should be told {string}", (String string) -> {
+        Then("I should get a message {string}", (String string) -> {
             Assert.assertEquals(string, this.answer);
         });
 
