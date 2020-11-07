@@ -10,7 +10,7 @@ public class FizzBuzzReturnMessages {
             return "Fizz";
         }
         else if(fizzBuzzChecker.checkIfDivisibleByThree(number) == false && fizzBuzzChecker.checkIfDivisibleByFive(number) == true) {
-            return "Fizz";
+            return "Buzz";
         }
         else if(fizzBuzzChecker.checkIfDivisibleByThree(number) == true && fizzBuzzChecker.checkIfDivisibleByFive(number) == true) {
             return "FizzBuzz";
