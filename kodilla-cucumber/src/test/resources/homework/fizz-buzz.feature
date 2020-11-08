@@ -2,9 +2,9 @@ Feature: Fizz-Buzz
 
   Scenario Outline: The number is divisible by 3, is divisible by 5, is divisible by 3 and 5, or is not divisible by 3 or 5
     Given number is <number>
-    When I ask if the number <isDivisibleByThree>
-    And I ask if the number <isDivisibleByFive>
-    When I compare <isDivisibleByThree> and <isDivisibleByFive>
+    When I ask if the number is divisible by three <isDivisibleByThree>
+    And I ask if the number is divisible by five <isDivisibleByFive>
+    When I compare its divisibility by three and five <isDivisibleByThree> <isDivisibleByFive>
     Then I should get a message <answer>
 
   Examples:
