@@ -28,7 +28,6 @@ public class FizzBuzzSteps implements En {
         When("^I check its divisibility by three and five$", () -> {
             FizzBuzzChecker fizzBuzzChecker = new FizzBuzzChecker();
             this.answer = fizzBuzzChecker.checkNumber(number);
-            Assert.assertEquals("Fizz",this.answer);
         });
 
 
