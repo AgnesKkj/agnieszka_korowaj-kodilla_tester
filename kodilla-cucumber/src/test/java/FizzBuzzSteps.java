@@ -1,4 +1,3 @@
-package homework;
 import io.cucumber.java8.En;
 import org.junit.Assert;
 
@@ -51,34 +50,32 @@ public class FizzBuzzSteps implements En {
         });
 
         When("^I compare its divisibility by three and five true false$", () -> {
-            FizzBuzzReturnMessages fizzBuzzReturnMessages = new FizzBuzzReturnMessages();
-            this.answer = fizzBuzzReturnMessages.returnFizzBuzzMessage(number);
-            Assert.assertEquals("Fizz",fizzBuzzReturnMessages.returnFizzBuzzMessage(number));
+            FizzBuzzChecker fizzBuzzChecker = new FizzBuzzChecker();
+            this.answer = fizzBuzzChecker.returnFizzBuzzMessage(number);
+            Assert.assertEquals("Fizz",this.answer);
         });
 
         When("^I compare its divisibility by three and five false true", () -> {
-            FizzBuzzReturnMessages fizzBuzzReturnMessages = new FizzBuzzReturnMessages();
-            this.answer = fizzBuzzReturnMessages.returnFizzBuzzMessage(number);
-            Assert.assertEquals("Buzz",fizzBuzzReturnMessages.returnFizzBuzzMessage(number));
+            FizzBuzzChecker fizzBuzzChecker = new FizzBuzzChecker();
+            this.answer = fizzBuzzChecker.returnFizzBuzzMessage(number);
+            Assert.assertEquals("Buzz",this.answer);
         });
 
         When("^I compare its divisibility by three and five false false", () -> {
-            FizzBuzzReturnMessages fizzBuzzReturnMessages = new FizzBuzzReturnMessages();
-            this.answer = fizzBuzzReturnMessages.returnFizzBuzzMessage(number);
-            Assert.assertEquals("None",fizzBuzzReturnMessages.returnFizzBuzzMessage(number));
+            FizzBuzzChecker fizzBuzzChecker = new FizzBuzzChecker();
+            this.answer = fizzBuzzChecker.returnFizzBuzzMessage(number);
+            Assert.assertEquals("None",this.answer);
         });
 
         When("^I compare its divisibility by three and five true true", () -> {
-            FizzBuzzReturnMessages fizzBuzzReturnMessages = new FizzBuzzReturnMessages();
-            this.answer = fizzBuzzReturnMessages.returnFizzBuzzMessage(number);
-            Assert.assertEquals("FizzBuzz",fizzBuzzReturnMessages.returnFizzBuzzMessage(number));
+            FizzBuzzChecker fizzBuzzChecker = new FizzBuzzChecker();
+            this.answer = fizzBuzzChecker.returnFizzBuzzMessage(number);
+            Assert.assertEquals("FizzBuzz",this.answer);
         });
 
         Then("I should get a message {string}", (String string) -> {
             Assert.assertEquals(string, this.answer);
         });
-
-
 
 
     }
