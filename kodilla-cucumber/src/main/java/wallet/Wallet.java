@@ -1,16 +1,36 @@
 package wallet;
 
 public class Wallet {
-    private int balance = 0;
+
+    private int initialBalance;
+    private int newBalance;
 
     public Wallet() {
     }
 
     public void deposit(int money) {
-        this.balance += money;
+        if(initialBalance <0) {
+            return;
+        }
+        else if(money < 0) {
+            newBalance = initialBalance;
+            System.out.println("Error. Cannot deposit negative amounts.");
+            return;
+        }
+        newBalance = initialBalance += money;
     }
 
-    public int getBalance() {
-        return balance;
+    public void setInitialBalance(int initialBalance) {
+        this.initialBalance = initialBalance;
     }
+
+    public int getInitialBalance() {
+        return initialBalance;
+    }
+
+    public int getNewBalance() {
+        return newBalance;
+    }
+
+
 }
