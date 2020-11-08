@@ -1,3 +1,4 @@
+/*
 import io.cucumber.java8.En;
 import org.junit.Assert;
 import seasonchecker.SeasonChecker;
@@ -36,3 +37,4 @@ import java.time.MonthDay;
             });
         }
     }
+*/
