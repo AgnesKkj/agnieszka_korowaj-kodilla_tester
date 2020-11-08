@@ -1,3 +1,5 @@
+package fizzBuzz;
+
 public class FizzBuzzChecker {
 
     FizzBuzzChecker fizzBuzzChecker = new FizzBuzzChecker();
