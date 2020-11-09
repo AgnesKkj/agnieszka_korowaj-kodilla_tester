@@ -13,25 +13,25 @@ public class CashWithdrawalSteps implements En {
         Given("^I have deposited 200 in my wallet$", () -> {
             wallet.setInitialBalance(0);
             wallet.deposit(200);
-            Assert.assertEquals(200,wallet.getNewBalance());
+            Assert.assertEquals("Error. Cannot deposit negative amounts.",200,wallet.getNewBalance());
         });
 
         Given("^I have deposited 400 in my wallet$", () -> {
             wallet.setInitialBalance(0);
             wallet.deposit(400);
-            Assert.assertEquals(400,wallet.getNewBalance());
+            Assert.assertEquals("Error. Cannot deposit negative amounts.",400,wallet.getNewBalance());
         });
 
         Given("^I have deposited 0 in my wallet$", () -> {
             wallet.setInitialBalance(0);
             wallet.deposit(0);
-            Assert.assertEquals(0,wallet.getNewBalance());
+            Assert.assertEquals("Error. Cannot deposit negative amounts.",0,wallet.getNewBalance());
         });
 
         Given("^I have deposited -100 in my wallet$", () -> {
             wallet.setInitialBalance(0);
             wallet.deposit(-100);
-            Assert.assertEquals(-100,wallet.getNewBalance());
+            Assert.assertEquals("Error. Cannot deposit negative amounts.",-100,wallet.getNewBalance());
         });
 
         When("^I request 30$", () -> {
@@ -54,13 +54,40 @@ public class CashWithdrawalSteps implements En {
             cashier.withdraw(wallet,-100);
         });
 
-        Then("^<withdrawnAmount> should be dispensed$", () -> {
+        Then("^30 should be dispensed$", () -> {
+            wallet.withdraw(30);
+            cashSlot.dispense(30);
+            Assert.assertEquals(30,cashSlot.getDispensedAmount());
         });
 
-        And("^<withdrawnAmount> is equal <requestedAmount>$", () -> {
+        Then("^0 should be dispensed$", () -> {
+            wallet.withdraw(0);
+            cashSlot.dispense(0);
+            Assert.assertEquals(0,cashSlot.getDispensedAmount());
         });
 
-        And("^the final balance is <finalBalance>$", () -> {
+        Then("^200 should be dispensed$", () -> {
+            wallet.withdraw(200);
+            cashSlot.dispense(200);
+            Assert.assertEquals(200,cashSlot.getDispensedAmount());
         });
+
+        And("^the final balance is 170$", () -> {
+            Assert.assertEquals(170, wallet.getNewBalance());
+        });
+
+        And("^the final balance is 200$", () -> {
+            Assert.assertEquals(200, wallet.getNewBalance());
+        });
+
+        And("^the final balance is 0$", () -> {
+            Assert.assertEquals(0, wallet.getNewBalance());
+        });
+
+        And("^the final balance is -100$", () -> {
+            Assert.assertEquals(-100, wallet.getNewBalance());
+        });
+
+
     }
 }

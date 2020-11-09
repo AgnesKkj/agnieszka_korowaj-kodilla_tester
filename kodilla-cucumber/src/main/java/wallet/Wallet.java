@@ -20,6 +20,18 @@ public class Wallet {
         newBalance = initialBalance += money;
     }
 
+    public void withdraw(int withdrawMoney) {
+        if(initialBalance <0) {
+            return;
+        }
+        else if(withdrawMoney < 0) {
+            newBalance = initialBalance;
+            System.out.println("Error. Cannot withdraw negative amounts.");
+            return;
+        }
+        newBalance = initialBalance -= withdrawMoney;
+    }
+
     public void setInitialBalance(int initialBalance) {
         this.initialBalance = initialBalance;
     }
