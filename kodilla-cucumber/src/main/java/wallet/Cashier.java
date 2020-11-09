@@ -7,7 +7,9 @@ public class Cashier {
         this.cashSlot = cashSlot;
     }
 
-    public void withdraw(Wallet wallet, int amount) {
+    public int withdraw(Wallet wallet, int amount) {
         cashSlot.dispense(amount);
+        return amount;
     }
+
 }

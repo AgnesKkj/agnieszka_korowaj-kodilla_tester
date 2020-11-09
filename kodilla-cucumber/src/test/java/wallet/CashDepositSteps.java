@@ -1,34 +1,37 @@
 package wallet;
-
 import io.cucumber.java8.En;
 import org.junit.Assert;
 
 public class CashDepositSteps implements En {
 
-
     Wallet wallet = new Wallet();
 
     public CashDepositSteps() {
+
         Given("^my initial balance is 0$", () -> {
             wallet.setInitialBalance(0);
+            Assert.assertEquals(0, wallet.getInitialBalance());
         });
 
         Given("^my initial balance is 200$", () -> {
             wallet.setInitialBalance(200);
+            Assert.assertEquals(200, wallet.getInitialBalance());
         });
 
         Given("^my initial balance is 100$", () -> {
             wallet.setInitialBalance(100);
+            Assert.assertEquals(100, wallet.getInitialBalance());
         });
 
         Given("^my initial balance is -1$", () -> {
             wallet.setInitialBalance(-1);
+            Assert.assertEquals(-1, wallet.getInitialBalance());
         });
 
         //rozumiem, że tutaj tolerujemy fail - tzn. w takim teście behawioralnym nie będzie obsługi wyjątków,
         // jeżeli chcę celowo uwzględnić przypadki na fail?
 
-        But("^my initial balance isn't less than '0'$", () -> {
+        And("^my initial balance isn't less than '0'$", () -> {
             Assert.assertFalse("Error. Invalid initial balance.", wallet.getInitialBalance() < 0);
         });
 
@@ -71,15 +74,6 @@ public class CashDepositSteps implements En {
         And("^the new balance is not 100$", () -> {
             Assert.assertNotEquals(100,wallet.getNewBalance());
         });
-
-        But("^with initial balance less than (\\d+)$", (String arg0) -> {
-            Assert.assertFalse(wallet.getInitialBalance() >= 0);
-        });
-
-        Then("^an exception should be thrown$", () -> {
-            throw new AssertionError();
-        });
-
 
 
     }
