@@ -24,10 +24,7 @@ public class Wallet {
     }
 
     public void withdraw(int withdrawMoney) {
-        if(initialBalance <0) {
-            return;
-        }
-        else if(withdrawMoney < 0) {
+        if(withdrawMoney < 0) {
             newBalance = initialBalance;
             System.out.println(negativeWithdrawMessage);
             return;
