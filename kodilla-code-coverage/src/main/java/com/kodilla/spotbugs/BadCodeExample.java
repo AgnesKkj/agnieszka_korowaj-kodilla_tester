@@ -1,5 +1,6 @@
 package com.kodilla.spotbugs;
 
+import javax.annotation.CheckReturnValue;
 import java.util.Objects;
 
 public class BadCodeExample {
@@ -13,6 +14,7 @@ public class BadCodeExample {
         return Math.PI;
     }
 
+    @CheckReturnValue
     public String getType() {
         return type;
     }
@@ -37,4 +39,3 @@ public class BadCodeExample {
     }
 
 }
-
