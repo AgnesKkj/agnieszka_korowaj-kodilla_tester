@@ -1,10 +1,9 @@
 package com.kodilla.spotbugs;
 
-import javax.annotation.CheckReturnValue;
 import java.util.Objects;
 
 public class BadCodeExample {
-    private String type;
+    private final String type;
 
     public BadCodeExample(String type) {
         this.type = type;
@@ -14,7 +13,6 @@ public class BadCodeExample {
         return Math.PI;
     }
 
-    @CheckReturnValue
     public String getType() {
         return type;
     }
@@ -31,11 +29,4 @@ public class BadCodeExample {
     public int hashCode() {
         return Objects.hash(getType());
     }
-
-    public static void main(String[] args) {
-        BadCodeExample badCodeExample = new BadCodeExample("typeOne");
-        badCodeExample.getType();
-        BadCodeExample.getPi();
-    }
-
 }
