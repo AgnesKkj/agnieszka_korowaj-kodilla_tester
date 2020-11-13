@@ -10,13 +10,11 @@ public class BadCodeExample {
     }
 
     public static double getPi() {
-        System.out.println(Math.PI);
         return Math.PI;
     }
 
     public String getType() {
-        System.out.println(this.type);
-        return this.type;
+        return type;
     }
 
     @Override
