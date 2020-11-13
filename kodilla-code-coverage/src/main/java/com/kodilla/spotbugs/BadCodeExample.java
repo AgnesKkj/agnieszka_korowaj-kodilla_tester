@@ -1,23 +1,42 @@
 package com.kodilla.spotbugs;
 
+import java.util.Objects;
+
 public class BadCodeExample {
     private String type;
 
+    public BadCodeExample(String type) {
+        this.type = type;
+    }
+
     public static double getPi() {
-        return 3.14;
+        System.out.println(Math.PI);
+        return Math.PI;
     }
 
     public String getType() {
-        return type;
+        System.out.println(this.type);
+        return this.type;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
-        BadCodeExample badCodeExample = (BadCodeExample) o;
-
-        return type != null ? type.equals(badCodeExample.type) : badCodeExample.type == null;
+        BadCodeExample that = (BadCodeExample) o;
+        return getType().equals(that.getType());
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getType());
+    }
+
+    public static void main(String[] args) {
+        BadCodeExample badCodeExample = new BadCodeExample("typeOne");
+        badCodeExample.getType();
+        BadCodeExample.getPi();
+    }
+
 }
+
