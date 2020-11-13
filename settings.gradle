@@ -13,4 +13,5 @@ include 'kodilla-google-selenium'
 include 'kodilla-cucumber'
 include 'kodilla-cucumber'
 include 'kodilla-cucumber-two'
+include 'kodilla-code-coverage'
 
