@@ -10,6 +10,8 @@ import java.sql.Statement;
 
 public class TestSelectUsersAndPosts {
 
+    //Miałam błędy typu Duplicate entry '20' for key 'posts.PRIMARY' - pomogło "wyczyszczenie" bazy przed uruchomieniem testu nawet, jeśli nie
+    // powinno być rekordu
     @Before
     public void cleanDataBaseRecords() throws SQLException {
         DbManager dbManager = DbManager.getInstance();
