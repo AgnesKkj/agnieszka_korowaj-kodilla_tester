@@ -30,23 +30,21 @@ public class TaskListRepositoryTestSuite {
         taskListRepository.save(taskListOne);
         TaskList taskListTwo = new TaskList(listNameTwo, descriptionTwo);
         taskListRepository.save(taskListTwo);
-        int listOneId = taskListOne.getId();
-        int listTwoId = taskListTwo.getId();
-        System.out.println("List one ID: " + listOneId + ", list two ID: " + listTwoId);
 
         //When
         List<TaskList> readTaskLists = taskListRepository.findByListName(listNameOne);
         String foundListName = readTaskLists.get(0).getListName();
+        String expectedListName = "Hibernate Exercise List";
 
         //Then
-        Assert.assertEquals(listNameOne, foundListName);
+        Assert.assertEquals(expectedListName, foundListName);
 
         //Cleanup
-        List<TaskList> tempList = (List<TaskList>) taskListRepository.findByListName(listNameOne);
-        int id = tempList.get(0).getId();
+        TaskList toBeDeleted = taskListRepository.findByListName(listNameOne).get(0);
+        int id = toBeDeleted.getId();
         taskListRepository.deleteById(id);
-        tempList = (List<TaskList>) taskListRepository.findByListName(listNameTwo);
-        id = tempList.get(0).getId();
+        toBeDeleted = taskListRepository.findByListName(listNameTwo).get(0);
+        id = toBeDeleted.getId();
         taskListRepository.deleteById(id);
     }
 
@@ -61,16 +59,17 @@ public class TaskListRepositoryTestSuite {
         //When
         List<TaskList> readTaskLists = taskListRepository.findByListName(listNameTwo);
         String foundListName = readTaskLists.get(0).getListName();
+        String unexpectedListName = "Hibernate Exercise List";
 
         //Then
-        Assert.assertNotEquals(listNameOne, foundListName);
+        Assert.assertNotEquals(unexpectedListName, foundListName);
 
         //Cleanup
-        List<TaskList> tempList = (List<TaskList>) taskListRepository.findByListName(listNameOne);
-        int id = tempList.get(0).getId();
+        TaskList toBeDeleted = taskListRepository.findByListName(listNameOne).get(0);
+        int id = toBeDeleted.getId();
         taskListRepository.deleteById(id);
-        tempList = (List<TaskList>) taskListRepository.findByListName(listNameTwo);
-        id = tempList.get(0).getId();
+        toBeDeleted = taskListRepository.findByListName(listNameTwo).get(0);
+        id = toBeDeleted.getId();
         taskListRepository.deleteById(id);
         }
 
