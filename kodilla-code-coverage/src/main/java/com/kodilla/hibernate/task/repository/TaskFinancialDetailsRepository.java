@@ -1,6 +1,14 @@
 package com.kodilla.hibernate.task.repository;
 
+import com.kodilla.hibernate.task.TaskFinancialDetails;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface TaskFinancialDetailsRepository extends CrudRepository {
+import javax.transaction.Transactional;
+import java.util.List;
+
+@Repository
+@Transactional
+public interface TaskFinancialDetailsRepository extends CrudRepository<TaskFinancialDetails, Integer> {
+    List<TaskFinancialDetails> findById(int id);
 }

@@ -1,6 +1,14 @@
 package com.kodilla.hibernate.manytomany.repository;
 
+import com.kodilla.hibernate.manytomany.Employee;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface EmployeeRepository extends CrudRepository {
+import javax.transaction.Transactional;
+import java.util.List;
+
+@Repository
+@Transactional
+public interface EmployeeRepository extends CrudRepository<Employee, String> {
+    List<Employee> findByName(String lastname);
 }

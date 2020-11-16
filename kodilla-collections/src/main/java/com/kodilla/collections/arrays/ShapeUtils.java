@@ -16,7 +16,7 @@ public class ShapeUtils {
 
     }
 
-    private static String getShapeName(Shape shape) {
+    static String getShapeName(Shape shape) {
         if(shape instanceof Circle)
             return "Circle";
 

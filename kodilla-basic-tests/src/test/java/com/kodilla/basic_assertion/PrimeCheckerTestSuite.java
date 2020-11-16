@@ -2,8 +2,7 @@ package com.kodilla.basic_assertion;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PrimeCheckerTestSuite {
 
@@ -56,6 +55,23 @@ public class PrimeCheckerTestSuite {
         count++;
         System.out.println("Test number " + count);
         assertFalse(result);
+    }
+
+    @Test
+    public void testGetCount() {
+        checker.incrementCount();
+        checker.incrementCount();
+        int expectedResult = 2;
+        int actualResult = checker.getCount();
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void testIncrementCount() {
+        checker.incrementCount();
+        int unexpectedResult = 0;
+        int actualResult = checker.getCount();
+        assertNotEquals(unexpectedResult, actualResult);
     }
 
 }

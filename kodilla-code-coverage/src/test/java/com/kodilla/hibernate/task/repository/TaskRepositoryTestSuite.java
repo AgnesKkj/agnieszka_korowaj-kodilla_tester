@@ -1,3 +1,5 @@
+/*
+
 package com.kodilla.hibernate.task.repository;
 
 import com.kodilla.hibernate.task.Task;
@@ -37,3 +39,4 @@ public class TaskRepositoryTestSuite {
         taskRepository.deleteById(id);
     }
 }
+*/

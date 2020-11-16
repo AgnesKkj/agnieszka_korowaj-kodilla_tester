@@ -21,7 +21,7 @@ public class CarsApplication {
             CarUtils.describeCar(car);
     }
 
-    private static Car drawCar() {
+    static Car drawCar() {
         Random random = new Random();
         int drawnCarKind = random.nextInt(3);
         //rand speed

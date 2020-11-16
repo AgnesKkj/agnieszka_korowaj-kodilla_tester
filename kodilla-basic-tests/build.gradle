@@ -4,6 +4,8 @@ plugins {
 
 group 'com.kodilla'
 version '1.0-SNAPSHOT'
+sourceCompatibility = 1.8
+
 
 test {
     useJUnitPlatform()
@@ -15,5 +17,7 @@ repositories {
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+    testImplementation("org.junit.jupiter:junit-jupiter-params:5.4.2")
+    testImplementation('org.mockito:mockito-core:3.1.0')
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
 }

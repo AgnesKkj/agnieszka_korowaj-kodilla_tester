@@ -19,7 +19,7 @@ public class ShapeApplication {
 
     }
 
-    private static Shape drawShape() {
+    static Shape drawShape() {
 
         Random random = new Random();
         int drawnShapeKind = random.nextInt(3);
