@@ -13,6 +13,7 @@ public class CarUtilsTest {
 
     @Test
     public void mockDescribeCar() {
+        carUtils.describeCar(ford);
         Mockito.verify(carUtils).describeCar(ford);
     }
 

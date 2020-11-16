@@ -12,6 +12,7 @@ public class ShapeUtilsTest {
 
     @Test
     public void mockDisplayShapeInfo() {
+        shapeUtils.displayShapeInfo(triangle);
         Mockito.verify(shapeUtils).displayShapeInfo(triangle);
     }
 

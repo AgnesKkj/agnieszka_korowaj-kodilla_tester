@@ -24,9 +24,11 @@ public class Book {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Book book = (Book) o;
-        return getTitle().equals(book.getTitle()) &&
-                getAuthor().equals(book.getAuthor());
+
+        if (getTitle() != null ? !getTitle().equals(book.getTitle()) : book.getTitle() != null) return false;
+        return getAuthor() != null ? getAuthor().equals(book.getAuthor()) : book.getAuthor() == null;
     }
 
     @Override

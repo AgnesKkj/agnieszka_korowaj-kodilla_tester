@@ -1,7 +1,3 @@
-// W Google już się pozmieniało i testy nie przejdą
-
-
-/*
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -73,6 +69,7 @@ public class TestGoogle {
         System.out.println(chosenElementHeadline);
 
         //then
+        //tutaj nie wiem, czemu przestało przechodzić
         assertTrue(allowedResults.contains(chosenElementHeadline));
     }
 
@@ -98,7 +95,7 @@ public class TestGoogle {
         System.out.println("Chosen by method: " + chosenElementHeadline);
 
         //then
-        assertNotEquals(expectedToBeFalseTitle,chosenElementHeadline);
+        assertNotEquals(String.valueOf(expectedToBeFalseTitle),String.valueOf(chosenElementHeadline));
     }
 
     @Test
@@ -113,9 +110,10 @@ public class TestGoogle {
         chosenResult.storeResultsToClick();
 
         //when
-        //tu zaczęło wychodzić na Index Out Of Bounds, bo jest już tylko 5 wyników na 1. stronie wyszukiwania
-        chosenResult.getChosenWebsiteElement(5);
-        String expectedTitle = chosenResult.getChosenWebsiteElement(5).findElement(By.tagName("span")).getText();
+        //tu zaczęło wychodzić na Index Out Of Bounds, bo jest już tylko 5 wyników na 1. stronie wyszukiwania, a nie 6 tak jak podczas pierwszego
+        // rozwiązywania zadania
+        chosenResult.getChosenWebsiteElement(2);
+        String expectedTitle = chosenResult.getChosenWebsiteElement(2).findElement(By.tagName("span")).getText();
         chosenResult.clickChosenElement();
         //czekam na załadowanie nowej strony
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//html/body")));
@@ -142,7 +140,7 @@ public class TestGoogle {
         String expectedToBeFalseTitle = expectedToBeFalse.getText();
         System.out.println("Expected to assert false: " + expectedToBeFalseTitle);
 
-        chosenResult.getChosenWebsiteElement(5);
+        chosenResult.getChosenWebsiteElement(2);
         chosenResult.clickChosenElement();
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//html/body")));
@@ -156,4 +154,3 @@ public class TestGoogle {
 
 
 }
-*/
