@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-class ShapeApplicationTestSuite {
+class ShapeApplicationTest {
 
     @Test
     public void testDrawShape() {
