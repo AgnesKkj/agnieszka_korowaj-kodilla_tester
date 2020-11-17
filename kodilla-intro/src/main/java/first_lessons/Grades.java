@@ -1,3 +1,5 @@
+package first_lessons;
+
 public class Grades {
     private int[] grades;
     private int size;

@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 @Component
 @Scope("prototype")
 public class Clock {
+
     public Clock(LocalDateTime time) {
         System.out.println("Creating clock bean: " + time);
     }

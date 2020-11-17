@@ -1,3 +1,5 @@
+package first_lessons;
+
 public class SimpleArray {
     public static void main(String[] args) {
         String[] waitingForGames = new String[5];

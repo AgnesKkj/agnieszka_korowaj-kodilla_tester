@@ -1,3 +1,5 @@
+package first_lessons;
+
 public class DebugExample {
     public static void main(String[] args) {
         int firstNumber = 33;

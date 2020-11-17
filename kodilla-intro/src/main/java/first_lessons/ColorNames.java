@@ -1,3 +1,5 @@
+package first_lessons;
+
 import java.util.Scanner;
 
 public class ColorNames {

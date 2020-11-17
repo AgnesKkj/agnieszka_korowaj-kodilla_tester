@@ -1,8 +1,10 @@
 package com.kodilla.exception;
 
+
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AirportRepositoryTestSuite {
 
@@ -22,7 +24,8 @@ public class AirportRepositoryTestSuite {
         //when
         boolean isWarsawInUse = airportRepository.isAirportInUse("Vienna");
         //then
-        assertFalse(isWarsawInUse);
+        assertThrows(AirportNotFoundException.class, () -> {
+            Integer.parseInt("One");});
     }
 
 

@@ -1,3 +1,5 @@
+package first_lessons;
+
 import java.util.Random;
 
 public class RandomNumbers {

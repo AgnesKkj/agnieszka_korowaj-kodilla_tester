@@ -1,3 +1,5 @@
+package advanced_calculator;
+
 import java.util.Scanner;
 
 public class UserDialogs {

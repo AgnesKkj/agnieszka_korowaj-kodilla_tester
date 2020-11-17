@@ -1,3 +1,5 @@
+package first_lessons;
+
 public class Notebook {
     //W klasie deklarujemy atrybuty bez wartości, bo te dojdą przy poszczególnych obiektach
     int weight;

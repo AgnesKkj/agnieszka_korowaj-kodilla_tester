@@ -1,3 +1,5 @@
+package first_lessons;
+
 public class ArrayNames {
     public static void main(String [] args) {
         String[] names = new String[] {"Zygfryd", "Gwidon", "Florentyna"};

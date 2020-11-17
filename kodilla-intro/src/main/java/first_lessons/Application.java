@@ -1,3 +1,4 @@
+package first_lessons;
 
 public class Application {
     private String name;

@@ -1,14 +1,25 @@
 package com.kodilla.spring.basic.spring_scopes.homework;
 
+
+import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.time.LocalDateTime;
 
+import static org.junit.Assert.assertNotNull;
 
-class ClockTestSuite {
+@SpringBootTest
+public class ClockTestSuite {
+
+    @Test
+    public void shouldCreateABean() {
+        ApplicationContext context = new AnnotationConfigApplicationContext("com.kodilla.spring.basic.spring_scopes");
+        Clock firstClockBean = (Clock) context.getBean("clock", LocalDateTime.of(2020,10,15,12,00));
+        assertNotNull(firstClockBean);
+    }
 
     @Test
     public void shouldCreateDifferentClockBeans() {

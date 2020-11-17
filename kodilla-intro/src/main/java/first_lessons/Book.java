@@ -1,3 +1,5 @@
+package first_lessons;
+
 public class Book {
     private String author;
     private String title;

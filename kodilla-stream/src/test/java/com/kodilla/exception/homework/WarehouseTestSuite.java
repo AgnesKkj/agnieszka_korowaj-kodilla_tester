@@ -1,11 +1,12 @@
 package com.kodilla.exception.homework;
 
+
 import org.junit.Test;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class WarehouseTestSuite {
     Set<Order> orderList = new HashSet<>();
@@ -27,7 +28,9 @@ public class WarehouseTestSuite {
         Warehouse.getOrder("3");
         //then
         Order expectedOrder = null;
-        assertEquals(expectedOrder.getNumber(), Warehouse.getOrder("3").getNumber());
         assertNotEquals(expectedOrder.getNumber(), Warehouse.getOrder("2").getNumber());
+        assertThrows(OrderDoesntExistException.class, () -> {
+                    Integer.parseInt("One");                }
+                );
     }
 }

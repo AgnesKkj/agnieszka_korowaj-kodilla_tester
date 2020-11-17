@@ -1,4 +1,5 @@
 
+import first_lessons.HelloWorld;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 

@@ -1,4 +1,5 @@
-import java.util.Scanner;
+package advanced_calculator;
+
 public class CalcApplication {
 
     public static void main(String[] args) {
